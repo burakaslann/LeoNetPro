@@ -1,0 +1,199 @@
+================================================================================
+  LeoNet Pro v1.0
+  Son Kullanıcı Lisans Sözleşmesi (EULA)
+  End User License Agreement (EULA)
+================================================================================
+
+───────────────────────────────────────────────────────────────────────────────
+TÜRKÇE
+───────────────────────────────────────────────────────────────────────────────
+
+Bu yazılımı indirerek, kurarak veya kullanarak aşağıdaki koşulları kabul
+etmiş sayılırsınız. Kabul etmiyorsanız kurulumu iptal edin.
+
+1. TARAFLAR
+
+   Bu sözleşme; LeoNet Pro v1.0 yazılımının ("Yazılım") geliştiricisi
+   Burak Aslan ("Geliştirici") ile Yazılımı kullanan kişi veya kuruluş
+   ("Kullanıcı") arasında geçerlidir.
+
+2. LİSANS
+
+   Yazılım ücretsiz olarak sunulmaktadır. Aşağıdaki koşullar geçerlidir:
+
+   a) KİŞİSEL KULLANIM — Serbesttir. Bireysel kullanıcılar herhangi bir
+      kısıtlama olmaksızın kullanabilir.
+
+   b) EĞİTİM / ARAŞTIRMA — Serbesttir. Akademik ve eğitim amaçlı
+      kullanım serbesttir.
+
+   c) TİCARİ KULLANIM — Yasaktır. Bu Yazılım, doğrudan veya dolaylı
+      olarak ticari kazanç sağlamak amacıyla kullanılamaz. Ticari
+      kullanım; müşterilere ücretli hizmet sunmak, yazılımı bir ürün
+      veya hizmetin parçası olarak yeniden dağıtmak ya da kurumsal
+      ağ yönetimi hizmeti satmak gibi durumları kapsar.
+
+      Ticari kullanım için önceden yazılı izin alınması zorunludur.
+      İletişim: https://github.com/burakaslann/LeoNetPro
+
+   Bu kısıtlamanın temel nedenlerinden biri, bu Yazılımın entegre
+   ettiği Speedtest CLI bileşeninin (Ookla LLC) ticari kullanımını
+   kendi lisansıyla yasaklamış olmasıdır. Bu Yazılımın ticari amaçla
+   kullanılması, Ookla'nın koşullarını da ihlal edebilir.
+
+3. YAZILIM NEDİR / NE DEĞİLDİR
+
+   LeoNet Pro; internet hız testi, ağ tanılaması, Wi-Fi tarama ve
+   raporlama işlemleri için tasarlanmış bir masaüstü yardımcı programdır.
+
+   Bu Yazılım:
+   - Herhangi bir sunucuya kişisel veri göndermez.
+   - Kullanıcı hakkında hiçbir bilgiyi kayıt altına almaz veya üçüncü
+     taraflarla paylaşmaz.
+   - Arka planda reklam, izleme veya analitik kodu çalıştırmaz.
+   - İnternet bağlantısını yalnızca kullanıcının başlattığı testler için
+     kullanır.
+
+4. ÜÇÜNCÜ TARAF BİLEŞENLER
+
+   Bu Yazılım aşağıdaki bağımsız bileşenlerle birlikte kullanılabilir;
+   her biri kendi lisansına tabidir ve Geliştirici tarafından
+   dağıtılmaz/garanti edilmez:
+
+   a) Speedtest CLI — Ookla LLC'ye aittir. Kullanıcılar Ookla'nın
+      kullanım koşullarını kabul etmekle yükümlüdür.
+      https://www.speedtest.net/apps/cli
+
+   b) iPerf3 — BSD Lisansı kapsamında açık kaynaklıdır.
+      https://iperf.fr
+
+   c) Tesseract OCR — Apache 2.0 Lisansı kapsamında açık kaynaklıdır.
+      https://github.com/UB-Mannheim/tesseract
+
+5. GARANTİ REDDİ
+
+   YAZILIM, HERHANGİ BİR GARANTİ VERİLMEKSİZİN "OLDUĞU GİBİ"
+   SUNULMAKTADIR. TİCARETE ELVERİŞLİLİK, BELİRLİ BİR AMACA UYGUNLUK
+   VEYA İHLAL ETMEME DAHİL OLMAK ÜZERE AÇIK YA DA ZIMNİ HİÇBİR GARANTİ
+   VERİLMEMEKTEDİR.
+
+6. SORUMLULUK SINIRLAMASI
+
+   GELİŞTİRİCİ; YAZILIMIN KULLANIMINDAN KAYNAKLANAN KAR KAYBI, VERİ
+   KAYBI, İŞ KESİNTİSİ VEYA DİĞER DOLAYLI ZARARLARDAN SORUMLU DEĞİLDİR.
+   KULLANICI YAZILIMI KENDİ RİSKİYLE KULLANIR.
+
+7. GÜNCELLEMELER
+
+   Geliştirici, önceden bildirmeksizin Yazılımı güncelleme, değiştirme
+   veya dağıtımını sonlandırma hakkını saklı tutar. Güncellemeler bu
+   sözleşmenin yeni koşullarıyla birlikte gelebilir.
+
+8. UYGULANACAK HUKUK
+
+   Bu sözleşme Türkiye Cumhuriyeti kanunlarına tabidir.
+
+9. İLETİŞİM
+
+   Yazılıma ilişkin soru ve geri bildirimler için:
+   https://github.com/burakaslann/LeoNetPro
+
+───────────────────────────────────────────────────────────────────────────────
+ENGLISH
+───────────────────────────────────────────────────────────────────────────────
+
+By downloading, installing, or using this software, you agree to the terms
+below. If you do not agree, cancel the installation.
+
+1. PARTIES
+
+   This agreement is between Burak Aslan ("Developer"), the developer of
+   LeoNet Pro v1.0 ("Software"), and the individual or organization using
+   the Software ("User").
+
+2. LICENSE
+
+   The Software is provided free of charge under the following conditions:
+
+   a) PERSONAL USE — Permitted. Individual users may use the Software
+      without restriction.
+
+   b) EDUCATION / RESEARCH — Permitted. Academic and educational use
+      is freely allowed.
+
+   c) COMMERCIAL USE — Prohibited. This Software may not be used,
+      directly or indirectly, for commercial gain. Commercial use
+      includes but is not limited to: providing paid services to
+      clients using this Software, redistributing it as part of a
+      product or service, or selling network management services
+      powered by this Software.
+
+      Prior written permission is required for any commercial use.
+      Contact: https://github.com/burakaslann/LeoNetPro
+
+   One of the primary reasons for this restriction is that the
+   Speedtest CLI component (by Ookla LLC) integrated into this
+   Software prohibits commercial use under its own license terms.
+   Commercial use of this Software may also constitute a violation
+   of Ookla's terms of service.
+
+3. WHAT THE SOFTWARE IS / IS NOT
+
+   LeoNet Pro is a desktop utility designed for internet speed testing,
+   network diagnostics, Wi-Fi scanning, and reporting.
+
+   This Software:
+   - Does NOT send any personal data to any server.
+   - Does NOT record or share any information about the user with
+     third parties.
+   - Does NOT run any advertising, tracking, or analytics code in
+     the background.
+   - Uses an internet connection only for tests initiated by the user.
+
+4. THIRD-PARTY COMPONENTS
+
+   This Software may be used alongside the following independent
+   components, each subject to its own license and neither distributed
+   nor warranted by the Developer:
+
+   a) Speedtest CLI — owned by Ookla LLC. Users are responsible for
+      accepting Ookla's terms of service.
+      https://www.speedtest.net/apps/cli
+
+   b) iPerf3 — open source under the BSD License.
+      https://iperf.fr
+
+   c) Tesseract OCR — open source under the Apache 2.0 License.
+      https://github.com/UB-Mannheim/tesseract
+
+5. DISCLAIMER OF WARRANTIES
+
+   THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
+   EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+   MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND
+   NON-INFRINGEMENT.
+
+6. LIMITATION OF LIABILITY
+
+   THE DEVELOPER SHALL NOT BE LIABLE FOR ANY LOSS OF PROFIT, DATA LOSS,
+   BUSINESS INTERRUPTION, OR OTHER INDIRECT DAMAGES ARISING FROM THE USE
+   OF THE SOFTWARE. THE USER USES THE SOFTWARE AT THEIR OWN RISK.
+
+7. UPDATES
+
+   The Developer reserves the right to update, modify, or discontinue
+   distribution of the Software without prior notice. Updates may come
+   with revised terms.
+
+8. GOVERNING LAW
+
+   This agreement is governed by the laws of the Republic of Turkey.
+
+9. CONTACT
+
+   For questions and feedback regarding the Software:
+   https://github.com/burakaslann/LeoNetPro
+
+================================================================================
+  Copyright (c) 2025 Burak Aslan — Tüm hakları saklıdır / All rights reserved
+================================================================================

@@ -1,0 +1,38 @@
+LeoNet Pro v1.0
+Copyright (c) 2025 Burak Aslan
+Tüm hakları saklıdır. / All rights reserved.
+
+Bu yazılımın kullanımı, kurulum sırasında kabul ettiğiniz Son Kullanıcı
+Lisans Sözleşmesi'ne (EULA.txt) tabidir.
+
+Kişisel ve eğitim amaçlı kullanım serbesttir.
+Ticari kullanım yasaktır — ayrıntılar için EULA.txt dosyasına bakın.
+
+---
+
+The use of this software is subject to the End User License Agreement
+(EULA.txt) accepted during installation.
+
+Personal and educational use is permitted.
+Commercial use is prohibited — see EULA.txt for details.
+
+---
+
+ÜÇÜNCÜ TARAF BİLEŞENLER / THIRD-PARTY COMPONENTS
+--------------------------------------------------
+
+iPerf3
+  License : BSD License
+  Source  : https://iperf.fr
+  Copyright (c) 1999-2023 The Board of Trustees of the University
+  of Illinois. All rights reserved.
+
+Tesseract OCR
+  License : Apache License 2.0
+  Source  : https://github.com/tesseract-ocr/tesseract
+  Copyright (c) 2006 Google Inc.
+
+Speedtest CLI
+  Owner   : Ookla LLC — https://www.speedtest.net/apps/cli
+  Note    : Not bundled with this software. Subject to Ookla's
+            own terms of service. Commercial use prohibited.
