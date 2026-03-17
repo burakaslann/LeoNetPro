@@ -18,6 +18,32 @@ Commercial use is prohibited — see EULA.txt for details.
 
 ---
 
+GARANTİ REDDİ / DISCLAIMER
+---------------------------
+
+BU YAZILIM, HERHANGİ BİR GARANTİ VERİLMEKSİZİN "OLDUĞU GİBİ"
+SUNULMAKTADIR. GELİŞTİRİCİ, YAZILIMIN KULLANIMINDAN VEYA
+KULLANILAMAYIŞINDAN KAYNAKLANAN HİÇBİR ZARARDAN SORUMLU DEĞİLDİR.
+
+THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED. THE DEVELOPER SHALL NOT BE LIABLE FOR ANY
+DAMAGES ARISING FROM THE USE OR INABILITY TO USE THIS SOFTWARE.
+
+---
+
+TİCARİ MARKA BİLDİRİMLERİ / TRADEMARK NOTICES
+-----------------------------------------------
+
+Bu yazılımda geçen tüm ürün adları, logolar ve markalar ilgili
+sahiplerinin mülkiyetindedir. Herhangi bir ticari markanın kullanımı,
+o marka sahibi tarafından onay veya sponsorluk anlamına gelmez.
+
+All product names, logos, and brands mentioned in this software are
+property of their respective owners. Use of any trademark does not
+imply endorsement or sponsorship by the trademark owner.
+
+---
+
 ÜÇÜNCÜ TARAF BİLEŞENLER / THIRD-PARTY COMPONENTS
 --------------------------------------------------
 
@@ -34,5 +60,44 @@ Tesseract OCR
 
 Speedtest CLI
   Owner   : Ookla LLC — https://www.speedtest.net/apps/cli
-  Note    : Not bundled with this software. Subject to Ookla's
-            own terms of service. Commercial use prohibited.
+  Note    : Not bundled with this software. Subject to Ookla's own
+            terms of service. Commercial use prohibited.
+  Notice  : Speedtest® is a registered trademark of Ookla LLC.
+            LeoNet Pro is not affiliated with, endorsed by, or
+            sponsored by Ookla LLC.
+
+LibreSpeed
+  License : LGPL License
+  Source  : https://librespeed.org
+  Note    : Browser-based speed test. Not bundled; accessed via URL.
+
+Cloudflare Speed Test Endpoints
+  Owner   : Cloudflare, Inc. — https://speed.cloudflare.com
+  Note    : Used as fallback speed test when Speedtest CLI is not
+            available. Accessed via publicly available HTTP endpoints.
+            Usage is manual-only, rate-limited (min. 30s between
+            tests), minimal in data volume, and non-commercial.
+            Not used in scheduled or automated tests.
+  Notice  : Cloudflare® is a registered trademark of Cloudflare, Inc.
+            LeoNet Pro is not affiliated with, endorsed by, or
+            sponsored by Cloudflare, Inc.
+
+Cloudflare DNS (cloudflare-dns.com)
+  Owner   : Cloudflare, Inc.
+  Note    : Used for DNSSEC validation, DoH/DoT availability checks
+            during user-initiated network diagnostics. Single-use
+            queries only; no persistent or automated connections.
+
+Akamai (whoami.akamai.net)
+  Owner   : Akamai Technologies, Inc.
+  Note    : Used for DNS leak detection during user-initiated
+            diagnostics. Single DNS query only.
+  Notice  : LeoNet Pro is not affiliated with Akamai Technologies.
+
+matplotlib
+  License : PSF-based License
+  Source  : https://matplotlib.org
+
+PyQt5
+  License : GPL v3 / Riverbank Commercial License
+  Source  : https://riverbankcomputing.com/software/pyqt

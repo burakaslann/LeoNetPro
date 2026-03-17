@@ -54,14 +54,32 @@ etmiş sayılırsınız. Kabul etmiyorsanız kurulumu iptal edin.
    - İnternet bağlantısını yalnızca kullanıcının başlattığı testler için
      kullanır.
 
-4. ÜÇÜNCÜ TARAF BİLEŞENLER
+   Yazılım aşağıdaki ağ işlemlerini gerçekleştirir (yalnızca kullanıcının
+   açıkça başlattığı işlemler):
+   - Hız testi sunucularına bağlantı (Speedtest CLI — Ookla)
+   - Cloudflare CDN üzerinden yedek hız testi (speed.cloudflare.com —
+     yalnızca Speedtest CLI bulunmadığında, yalnızca manuel tetikleme,
+     oran sınırlı, otomatik/zamanlanmış testlerde kullanılmaz)
+   - Cloudflare CDN üzerinden bufferbloat testi sırasında geçici dosya
+     indirme/yükleme (tek seferlik, tanılama kapsamında)
+   - LibreSpeed tarayıcı tabanlı hız testi (kullanıcının belirttiği URL)
+   - iPerf3 istemci/sunucu bağlantıları (kullanıcının tanımladığı adresler)
+   - ICMP ping, DNS sorguları, TCP/UDP port kontrolleri ve traceroute
+   - DNSSEC doğrulama ve DNS over HTTPS/TLS erişim kontrolü
+     (cloudflare-dns.com üzerinden tek seferlik sorgular)
+   - DNS leak testi (whoami.akamai.net üzerinden tek DNS sorgusu)
+   - GitHub Releases API üzerinden güncelleme kontrolü (isteğe bağlı)
 
-   Bu Yazılım aşağıdaki bağımsız bileşenlerle birlikte kullanılabilir;
-   her biri kendi lisansına tabidir ve Geliştirici tarafından
-   dağıtılmaz/garanti edilmez:
+4. ÜÇÜNCÜ TARAF BİLEŞENLER VE HİZMETLER
+
+   Bu Yazılım aşağıdaki bağımsız bileşen ve hizmetlerle birlikte
+   kullanılabilir. Her biri kendi lisansına tabidir. Geliştirici bu
+   bileşenleri dağıtmaz, garanti etmez ve bunların kullanılabilirliği,
+   doğruluğu veya sürekliliği konusunda hiçbir taahhütte bulunmaz.
 
    a) Speedtest CLI — Ookla LLC'ye aittir. Kullanıcılar Ookla'nın
-      kullanım koşullarını kabul etmekle yükümlüdür.
+      kullanım koşullarını kabul etmekle yükümlüdür. Bu Yazılım ile
+      birlikte dağıtılmaz.
       https://www.speedtest.net/apps/cli
 
    b) iPerf3 — BSD Lisansı kapsamında açık kaynaklıdır.
@@ -70,33 +88,115 @@ etmiş sayılırsınız. Kabul etmiyorsanız kurulumu iptal edin.
    c) Tesseract OCR — Apache 2.0 Lisansı kapsamında açık kaynaklıdır.
       https://github.com/UB-Mannheim/tesseract
 
-5. GARANTİ REDDİ
+   d) Cloudflare Hız Testi Endpoint'leri — Cloudflare, Inc.'e aittir.
+      Yalnızca Speedtest CLI mevcut olmadığında yedek hız ölçümü olarak
+      kullanılır. Bu endpoint'ler halka açık olup resmi bir API
+      oluşturmaz; Cloudflare tarafından önceden bildirimde bulunulmaksızın
+      değiştirilebilir veya kaldırılabilir. Kullanım: yalnızca manuel,
+      oran sınırlı, minimum veri hacminde ve ticari olmayan.
+      https://speed.cloudflare.com
+
+   e) Cloudflare DNS (cloudflare-dns.com) — DNSSEC doğrulama ve DoH/DoT
+      erişilebilirlik kontrolü için kullanılır. Yalnızca kullanıcının
+      başlattığı tanılama sırasında tek seferlik sorgular yapılır.
+
+   f) LibreSpeed — LGPL Lisansı kapsamında açık kaynaklıdır.
+      https://librespeed.org
+
+   g) Akamai (whoami.akamai.net) — DNS leak testi için kullanılır.
+      Yalnızca kullanıcının başlattığı tanılama sırasında tek DNS
+      sorgusu yapılır.
+
+   KULLANICI, YUKARIDA SAYILAN ÜÇÜNCÜ TARAF HİZMETLERİN KULLANIMININ
+   İLGİLİ HİZMET SAĞLAYICININ KOŞULLARINA TABİ OLDUĞUNU VE BU
+   KOŞULLARA UYMA SORUMLULUĞUNUN KENDİSİNE AİT OLDUĞUNU KABUL EDER.
+
+5. VERİ DEPOLAMA VE GİZLİLİK
+
+   Yazılım, aşağıdaki verileri yalnızca yerel bilgisayarda saklar:
+   - Test sonuçları (SQLite veritabanı — %TEMP%\hiz_testleri.db)
+   - Bağlantı kesintisi kayıtları (aynı SQLite veritabanında)
+   - Uygulama ayarları (Windows Registry — QSettings)
+
+   Bu veriler hiçbir harici sunucuya aktarılmaz. Yazılım, kullanıcının
+   açık onayı olmadan hiçbir ağ bağlantısı kurmaz.
+
+6. TİCARİ MARKA BİLDİRİMLERİ
+
+   Bu Yazılımda geçen tüm ürün adları, logolar ve markalar ilgili
+   sahiplerinin mülkiyetindedir. Özellikle:
+
+   - Speedtest® Ookla LLC'nin tescilli markasıdır.
+   - Cloudflare® Cloudflare, Inc.'in tescilli markasıdır.
+
+   Bu Yazılım, yukarıda adı geçen şirketlerden herhangi biri tarafından
+   onaylanmamış, desteklenmemiş veya sponsor edilmemiştir. Ticari marka
+   kullanımı yalnızca tanımlama amacıylıdır.
+
+7. UYUMLULUK TAAHHÜDÜ
+
+   Geliştirici, üçüncü taraf hizmet sağlayıcıların kullanım koşullarına
+   saygı gösterilmesi için makul teknik önlemler almıştır:
+
+   - Cloudflare endpoint'leri yalnızca yedek olarak, yalnızca kullanıcının
+     manuel tetiklemesiyle ve oran sınırlamasıyla kullanılır.
+   - Speedtest CLI bu Yazılım ile birlikte dağıtılmaz.
+   - Otomatik/zamanlanmış testlerde üçüncü taraf endpoint'leri
+     kullanılmaz; bu testler için Speedtest CLI gereklidir.
+
+   Herhangi bir üçüncü taraf hizmet sağlayıcı, bu Yazılımın kullanım
+   biçimiyle ilgili endişe duyması halinde, Geliştirici ile iletişime
+   geçebilir. Geliştirici, makul sürede gerekli değişiklikleri yapmayı
+   taahhüt eder.
+
+8. GARANTİ REDDİ
 
    YAZILIM, HERHANGİ BİR GARANTİ VERİLMEKSİZİN "OLDUĞU GİBİ"
    SUNULMAKTADIR. TİCARETE ELVERİŞLİLİK, BELİRLİ BİR AMACA UYGUNLUK
    VEYA İHLAL ETMEME DAHİL OLMAK ÜZERE AÇIK YA DA ZIMNİ HİÇBİR GARANTİ
    VERİLMEMEKTEDİR.
 
-6. SORUMLULUK SINIRLAMASI
+   GELİŞTİRİCİ, ÜÇÜNCÜ TARAF HİZMETLERİN ERİŞİLEBİLİRLİĞİ, DOĞRULUĞU,
+   SÜREKLİLİĞİ VEYA PERFORMANSI HAKKINDA HİÇBİR GARANTİ VERMEZ. BU
+   HİZMETLER HERHANGİ BİR ZAMANDA ÖNCEDen BİLDİRİMDE BULUNULMAKSIZIN
+   DEĞİŞEBİLİR VEYA SONA EREBİLİR.
 
-   GELİŞTİRİCİ; YAZILIMIN KULLANIMINDAN KAYNAKLANAN KAR KAYBI, VERİ
-   KAYBI, İŞ KESİNTİSİ VEYA DİĞER DOLAYLI ZARARLARDAN SORUMLU DEĞİLDİR.
-   KULLANICI YAZILIMI KENDİ RİSKİYLE KULLANIR.
+9. SORUMLULUK SINIRLAMASI
 
-7. GÜNCELLEMELER
+   GELİŞTİRİCİ; YAZILIMIN KULLANIMINDAN VEYA KULLANILAMAYIŞINDAN
+   KAYNAKLANAN KAR KAYBI, VERİ KAYBI, İŞ KESİNTİSİ, İTİBAR KAYBI
+   VEYA DİĞER DOĞRUDAN, DOLAYLI, ARIZİ, ÖZEL VEYA SONUÇ OLARAK
+   ORTAYA ÇIKAN HİÇBİR ZARARDAN SORUMLU DEĞİLDİR. BU SINIRLAMALAR,
+   GELİŞTİRİCİNİN SÖZ KONUSU ZARARLARIN OLASILIĞI HAKKINDA
+   BİLGİLENDİRİLMİŞ OLSA BİLE GEÇERLİDİR.
 
-   Geliştirici, önceden bildirmeksizin Yazılımı güncelleme, değiştirme
-   veya dağıtımını sonlandırma hakkını saklı tutar. Güncellemeler bu
-   sözleşmenin yeni koşullarıyla birlikte gelebilir.
+   KULLANICI YAZILIMI TAMAMEN KENDİ RİSKİYLE KULLANIR.
 
-8. UYGULANACAK HUKUK
+   KULLANICI, YAZILIMIN KULLANIMINDAN DOĞAN ÜÇÜNCÜ TARAFLARIN
+   TALEPLERİNE KARŞI GELİŞTİRİCİYİ TAZMİN ETMEYİ VE ZARARSIZ
+   TUTMAYI KABUL EDER.
 
-   Bu sözleşme Türkiye Cumhuriyeti kanunlarına tabidir.
+10. GÜNCELLEMELER
 
-9. İLETİŞİM
+    Geliştirici, önceden bildirmeksizin Yazılımı güncelleme, değiştirme
+    veya dağıtımını sonlandırma hakkını saklı tutar. Güncellemeler bu
+    sözleşmenin yeni koşullarıyla birlikte gelebilir.
 
-   Yazılıma ilişkin soru ve geri bildirimler için:
-   https://github.com/burakaslann/LeoNetPro
+11. BÖLÜNEBİLİRLİK
+
+    Bu sözleşmenin herhangi bir hükmünün geçersiz veya uygulanamaz
+    bulunması, kalan hükümlerin geçerliliğini etkilemez.
+
+12. UYGULANACAK HUKUK VE UYUŞMAZLIK ÇÖZÜMÜ
+
+    Bu sözleşme Türkiye Cumhuriyeti kanunlarına tabidir. Bu sözleşmeden
+    doğan uyuşmazlıklarda Türkiye Cumhuriyeti mahkemeleri yetkilidir.
+
+13. İLETİŞİM
+
+    Yazılıma ilişkin soru, geri bildirimler ve üçüncü taraf endişeleri
+    için:
+    https://github.com/burakaslann/LeoNetPro
 
 ───────────────────────────────────────────────────────────────────────────────
 ENGLISH
@@ -148,16 +248,34 @@ below. If you do not agree, cancel the installation.
      third parties.
    - Does NOT run any advertising, tracking, or analytics code in
      the background.
-   - Uses an internet connection only for tests initiated by the user.
+   - Uses an internet connection only for tests explicitly initiated
+     by the user.
 
-4. THIRD-PARTY COMPONENTS
+   The Software performs the following network operations (only when
+   explicitly initiated by the user):
+   - Connections to speed test servers (Speedtest CLI — Ookla)
+   - Cloudflare CDN fallback speed test (speed.cloudflare.com —
+     only when Speedtest CLI is not available, manual trigger only,
+     rate-limited, not used in scheduled/automated tests)
+   - Cloudflare CDN temporary download/upload during bufferbloat
+     diagnostic (single-use, within diagnostics scope)
+   - LibreSpeed browser-based speed test (user-specified URL)
+   - iPerf3 client/server connections (to user-defined servers)
+   - ICMP ping, DNS queries, TCP/UDP port checks, and traceroute
+   - DNSSEC validation and DNS over HTTPS/TLS accessibility checks
+     (via cloudflare-dns.com, single-use queries)
+   - DNS leak testing (single DNS query via whoami.akamai.net)
+   - Update check via GitHub Releases API (optional)
+
+4. THIRD-PARTY COMPONENTS AND SERVICES
 
    This Software may be used alongside the following independent
-   components, each subject to its own license and neither distributed
-   nor warranted by the Developer:
+   components and services. Each is subject to its own license. The
+   Developer does not distribute, warrant, or guarantee the availability,
+   accuracy, or continuity of any of these components or services.
 
    a) Speedtest CLI — owned by Ookla LLC. Users are responsible for
-      accepting Ookla's terms of service.
+      accepting Ookla's terms of service. Not bundled with this Software.
       https://www.speedtest.net/apps/cli
 
    b) iPerf3 — open source under the BSD License.
@@ -166,33 +284,115 @@ below. If you do not agree, cancel the installation.
    c) Tesseract OCR — open source under the Apache 2.0 License.
       https://github.com/UB-Mannheim/tesseract
 
-5. DISCLAIMER OF WARRANTIES
+   d) Cloudflare Speed Test Endpoints — owned by Cloudflare, Inc.
+      Used solely as a fallback speed measurement tool when Speedtest CLI
+      is not available. These endpoints are publicly accessible but do not
+      constitute an official API; they may be changed or removed by
+      Cloudflare without prior notice. Usage: manual-only, rate-limited,
+      minimal data volume, non-commercial.
+      https://speed.cloudflare.com
+
+   e) Cloudflare DNS (cloudflare-dns.com) — used for DNSSEC validation
+      and DoH/DoT accessibility checks. Only single-use queries during
+      user-initiated diagnostics.
+
+   f) LibreSpeed — open source under the LGPL License.
+      https://librespeed.org
+
+   g) Akamai (whoami.akamai.net) — used for DNS leak detection. Only
+      a single DNS query during user-initiated diagnostics.
+
+   THE USER ACKNOWLEDGES THAT USE OF THE ABOVE THIRD-PARTY SERVICES
+   IS SUBJECT TO THE RESPECTIVE SERVICE PROVIDER'S TERMS AND CONDITIONS,
+   AND THAT THE RESPONSIBILITY FOR COMPLIANCE RESTS SOLELY WITH THE USER.
+
+5. DATA STORAGE AND PRIVACY
+
+   The Software stores the following data only on the local computer:
+   - Test results (SQLite database — %TEMP%\hiz_testleri.db)
+   - Connection outage records (same SQLite database)
+   - Application settings (Windows Registry — QSettings)
+
+   No data is transmitted to any external server. The Software does not
+   establish any network connection without the user's explicit consent.
+
+6. TRADEMARK NOTICES
+
+   All product names, logos, and brands mentioned in this Software are
+   property of their respective owners. In particular:
+
+   - Speedtest® is a registered trademark of Ookla LLC.
+   - Cloudflare® is a registered trademark of Cloudflare, Inc.
+
+   This Software is not endorsed by, affiliated with, or sponsored by
+   any of the above companies. Trademark use is for identification
+   purposes only.
+
+7. COMPLIANCE COMMITMENT
+
+   The Developer has implemented reasonable technical measures to respect
+   third-party service providers' terms of use:
+
+   - Cloudflare endpoints are used only as a fallback, only with manual
+     user trigger, and with rate limiting (minimum 30 seconds between
+     tests).
+   - Speedtest CLI is not distributed with this Software.
+   - Scheduled/automated tests do not use third-party endpoints;
+     Speedtest CLI is required for such tests.
+
+   Should any third-party service provider have concerns regarding this
+   Software's usage patterns, they are invited to contact the Developer.
+   The Developer commits to implementing reasonable changes within a
+   reasonable timeframe.
+
+8. DISCLAIMER OF WARRANTIES
 
    THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND
    NON-INFRINGEMENT.
 
-6. LIMITATION OF LIABILITY
+   THE DEVELOPER MAKES NO WARRANTY REGARDING THE ACCESSIBILITY,
+   ACCURACY, CONTINUITY, OR PERFORMANCE OF ANY THIRD-PARTY SERVICES.
+   SUCH SERVICES MAY CHANGE OR CEASE AT ANY TIME WITHOUT PRIOR NOTICE.
+
+9. LIMITATION OF LIABILITY
 
    THE DEVELOPER SHALL NOT BE LIABLE FOR ANY LOSS OF PROFIT, DATA LOSS,
-   BUSINESS INTERRUPTION, OR OTHER INDIRECT DAMAGES ARISING FROM THE USE
-   OF THE SOFTWARE. THE USER USES THE SOFTWARE AT THEIR OWN RISK.
+   BUSINESS INTERRUPTION, LOSS OF REPUTATION, OR ANY OTHER DIRECT,
+   INDIRECT, INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES ARISING FROM
+   THE USE OR INABILITY TO USE THE SOFTWARE. THESE LIMITATIONS APPLY
+   EVEN IF THE DEVELOPER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
+   DAMAGES.
 
-7. UPDATES
+   THE USER USES THE SOFTWARE ENTIRELY AT THEIR OWN RISK.
 
-   The Developer reserves the right to update, modify, or discontinue
-   distribution of the Software without prior notice. Updates may come
-   with revised terms.
+   THE USER AGREES TO INDEMNIFY AND HOLD HARMLESS THE DEVELOPER AGAINST
+   ANY THIRD-PARTY CLAIMS ARISING FROM THE USER'S USE OF THE SOFTWARE.
 
-8. GOVERNING LAW
+10. UPDATES
 
-   This agreement is governed by the laws of the Republic of Turkey.
+    The Developer reserves the right to update, modify, or discontinue
+    distribution of the Software without prior notice. Updates may come
+    with revised terms.
 
-9. CONTACT
+11. SEVERABILITY
 
-   For questions and feedback regarding the Software:
-   https://github.com/burakaslann/LeoNetPro
+    If any provision of this agreement is found to be invalid or
+    unenforceable, the remaining provisions shall remain in full
+    force and effect.
+
+12. GOVERNING LAW AND DISPUTE RESOLUTION
+
+    This agreement is governed by the laws of the Republic of Turkey.
+    The courts of the Republic of Turkey shall have exclusive
+    jurisdiction over any disputes arising from this agreement.
+
+13. CONTACT
+
+    For questions, feedback, and third-party concerns regarding the
+    Software:
+    https://github.com/burakaslann/LeoNetPro
 
 ================================================================================
   Copyright (c) 2025 Burak Aslan — Tüm hakları saklıdır / All rights reserved
