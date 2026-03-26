@@ -8,12 +8,12 @@ LeoNet Pro is a desktop network diagnostics and speed testing application for Wi
 
 ## Screenshots
 
-![Ana Ekran](screenshots/main_screen.png)
-![iPerf3 / LibreSpeed](screenshots/iperf3_librespeed.png)
-![Geçmiş](screenshots/history.png)
-![Tanılama](screenshots/diagnostics.png)
-![WiFi](screenshots/wifi.png)
-![Ayarlar](screenshots/settings.png)
+![Ana Ekran](screenshots/LeoNetPro1.png)
+![iPerf3 / LibreSpeed](screenshots/LeoNetPro2.png)
+![Geçmiş](screenshots/LeoNetPro3.png)
+![Tanılama](screenshots/LeoNetPro4.png)
+![WiFi](screenshots/LeoNetPro5.png)
+![Ayarlar](screenshots/LeoNetPro6.png)
 
 ---
 
