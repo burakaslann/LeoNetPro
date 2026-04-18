@@ -1,8 +1,22 @@
-# LeoNet Pro v1.0 🦁
+# LeoNet Pro v1.0.1 🦁
 
 **Network Diagnostics & Internet Speed Test Desktop Application**
 
 LeoNet Pro is a desktop network diagnostics and speed testing application for Windows 10/11. Speed testing, live ping monitoring, Wi-Fi scanning, advanced network diagnostics, iPerf3 throughput testing, and report export — all in a single interface with 6 themes and Turkish/English language support.
+
+---
+
+## What's New in v1.0.1
+
+- ⚡ **iPerf3 v3.21 upgrade** — migrated to a Windows build with bundled runtime DLL dependencies, replacing older incompatible builds
+- 🛠 **iPerf3 compatibility fix** — resolved EXE/Setup errors (permission denied, missing entry points, DLL issues)
+- 📦 **Bundled iPerf3 runtime** — required DLL files are included and installed automatically
+- 🌐 **Full localization on Diagnostics tab** — All cards, status messages, and grades now switch instantly with the UI language.
+- 🎨 **Translated theme names** — Theme selector respects the active language.
+- 📡 **Ping monitor translations** — Connected / No Connection / High Ping / Stopped / Monitoring.
+- 🔧 **Better cache handling** — Diagnostic results stay in sync when language is switched mid-session.
+
+See the full [v1.0.1 release notes](https://github.com/burakaslann/LeoNetPro/releases/tag/v1.0.1).
 
 ---
 
@@ -19,7 +33,7 @@ LeoNet Pro is a desktop network diagnostics and speed testing application for Wi
 
 ## Download
 
-👉 **[Download the latest release (LeoNetPro_Setup_v1.0.exe)](https://github.com/burakaslann/LeoNetPro/releases/latest)**
+👉 **[Download the latest release (LeoNetPro_Setup_v1.0.1.exe)](https://github.com/burakaslann/LeoNetPro/releases/latest)**
 
 No Python or pip required. Just download and run the setup wizard.
 
@@ -30,6 +44,7 @@ No Python or pip required. Just download and run the setup wizard.
 ### Speed Testing
 - ⚡ **Internet Speed Test** — Speedtest CLI (Ookla) integration; download, upload and ping results
 - 🌐 **iPerf3 Real Throughput Testing** — parallel streams, bandwidth cap, continuous traffic mode, live server log with `--logfile` polling
+- 🔀 iPerf3 Integration — bundled Windows build (v3.21) with required DLL dependencies
 - 🖥️ **iPerf3 Server Mode** — built-in server with live log output, automatic port cleanup on restart
 - 🚀 **LibreSpeed Test** — browser-based speed test, no external binary required
 - ☁️ **Cloudflare Fallback Speed Test** — when Speedtest CLI is not installed, manual-only download/upload/ping measurement via Cloudflare's public endpoints (rate-limited, not used in scheduled tests)
@@ -69,8 +84,8 @@ No Python or pip required. Just download and run the setup wizard.
 - 🖥️ **System Tray** — run in background, tray notifications, right-click context menu
 
 ### Customization
-- 🎨 **6 Themes** — Light, Dark Navy, Forest Green, Sunset Orange, Cherry Blossom, Midnight Black
-- 🇹🇷 🇬🇧 **Turkish / English** — instant language switch, no restart required
+- 🎨 **6 Themes** — Light, Dark Navy, Forest Green, Sunset Orange, Cherry Blossom, Midnight Black (theme names localized per UI language)
+- 🇹🇷 🇬🇧 **Turkish / English** — instant language switch, no restart required; all diagnostic cards, grades, and status messages translate live
 - ⏱️ **Auto Test** — scheduled speed test every N minutes (requires Speedtest CLI)
 - 🔊 **Sound Effects** — click and alert sounds with mute toggle
 - 📐 **Mini Widget** — floating mini speed display
@@ -81,9 +96,9 @@ No Python or pip required. Just download and run the setup wizard.
 
 ### 1. Download Setup
 
-Go to [Releases](https://github.com/burakaslann/LeoNetPro/releases) and download `LeoNetPro_Setup_v1.0.exe`.
+Go to [Releases](https://github.com/burakaslann/LeoNetPro/releases) and download `LeoNetPro_Setup_v1.0.1.exe`.
 
-Run the setup wizard — iPerf3 and Tesseract OCR are included as optional components.
+Run the setup wizard — iPerf3 is included as an optional component (enabled by default) and will be installed with all required DLL files.
 
 ### 2. Install Speedtest CLI ⚠️
 
