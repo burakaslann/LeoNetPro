@@ -1,5 +1,5 @@
 ================================================================================
-  LeoNet Pro v1.0
+  LeoNet Pro v1.0.1
   Son Kullanıcı Lisans Sözleşmesi (EULA)
   End User License Agreement (EULA)
 ================================================================================
@@ -13,7 +13,7 @@ etmiş sayılırsınız. Kabul etmiyorsanız kurulumu iptal edin.
 
 1. TARAFLAR
 
-   Bu sözleşme; LeoNet Pro v1.0 yazılımının ("Yazılım") geliştiricisi
+   Bu sözleşme; LeoNet Pro v1.0.1 yazılımının ("Yazılım") geliştiricisi
    Burak Aslan ("Geliştirici") ile Yazılımı kullanan kişi veya kuruluş
    ("Kullanıcı") arasında geçerlidir.
 
@@ -83,6 +83,7 @@ etmiş sayılırsınız. Kabul etmiyorsanız kurulumu iptal edin.
       https://www.speedtest.net/apps/cli
 
    b) iPerf3 — BSD Lisansı kapsamında açık kaynaklıdır.
+      Modern native Windows build ile birlikte dağıtılabilir.
       https://iperf.fr
 
    c) Tesseract OCR — Apache 2.0 Lisansı kapsamında açık kaynaklıdır.
@@ -158,7 +159,7 @@ etmiş sayılırsınız. Kabul etmiyorsanız kurulumu iptal edin.
 
    GELİŞTİRİCİ, ÜÇÜNCÜ TARAF HİZMETLERİN ERİŞİLEBİLİRLİĞİ, DOĞRULUĞU,
    SÜREKLİLİĞİ VEYA PERFORMANSI HAKKINDA HİÇBİR GARANTİ VERMEZ. BU
-   HİZMETLER HERHANGİ BİR ZAMANDA ÖNCEDen BİLDİRİMDE BULUNULMAKSIZIN
+   HİZMETLER HERHANGİ BİR ZAMANDA ÖNCEDEN BİLDİRİMDE BULUNULMAKSIZIN
    DEĞİŞEBİLİR VEYA SONA EREBİLİR.
 
 9. SORUMLULUK SINIRLAMASI
@@ -208,7 +209,7 @@ below. If you do not agree, cancel the installation.
 1. PARTIES
 
    This agreement is between Burak Aslan ("Developer"), the developer of
-   LeoNet Pro v1.0 ("Software"), and the individual or organization using
+   LeoNet Pro v1.0.1 ("Software"), and the individual or organization using
    the Software ("User").
 
 2. LICENSE
@@ -279,6 +280,7 @@ below. If you do not agree, cancel the installation.
       https://www.speedtest.net/apps/cli
 
    b) iPerf3 — open source under the BSD License.
+      A modern native Windows build may be distributed with this software.
       https://iperf.fr
 
    c) Tesseract OCR — open source under the Apache 2.0 License.
@@ -395,5 +397,5 @@ below. If you do not agree, cancel the installation.
     https://github.com/burakaslann/LeoNetPro
 
 ================================================================================
-  Copyright (c) 2025 Burak Aslan — Tüm hakları saklıdır / All rights reserved
+  Copyright (c) 2025-2026 Burak Aslan — Tüm hakları saklıdır / All rights reserved
 ================================================================================
