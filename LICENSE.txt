@@ -1,5 +1,5 @@
-LeoNet Pro v1.0
-Copyright (c) 2025 Burak Aslan
+LeoNet Pro v1.0.1
+Copyright (c) 2025-2026 Burak Aslan
 Tüm hakları saklıdır. / All rights reserved.
 
 Bu yazılımın kullanımı, kurulum sırasında kabul ettiğiniz Son Kullanıcı
@@ -48,8 +48,10 @@ imply endorsement or sponsorship by the trademark owner.
 --------------------------------------------------
 
 iPerf3
+  Version : v3.21 (native Windows build)
   License : BSD License
   Source  : https://iperf.fr
+  Build   : https://github.com/ar51an/iperf3-win-builds
   Copyright (c) 1999-2023 The Board of Trustees of the University
   of Illinois. All rights reserved.
 
