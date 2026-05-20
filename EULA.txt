@@ -1,5 +1,5 @@
 ================================================================================
-  LeoNet Pro v1.0.1
+  LeoNet Pro v1.1.0
   Son Kullanıcı Lisans Sözleşmesi (EULA)
   End User License Agreement (EULA)
 ================================================================================
@@ -13,7 +13,7 @@ etmiş sayılırsınız. Kabul etmiyorsanız kurulumu iptal edin.
 
 1. TARAFLAR
 
-   Bu sözleşme; LeoNet Pro v1.0.1 yazılımının ("Yazılım") geliştiricisi
+   Bu sözleşme; LeoNet Pro v1.1.0 yazılımının ("Yazılım") geliştiricisi
    Burak Aslan ("Geliştirici") ile Yazılımı kullanan kişi veya kuruluş
    ("Kullanıcı") arasında geçerlidir.
 
@@ -209,7 +209,7 @@ below. If you do not agree, cancel the installation.
 1. PARTIES
 
    This agreement is between Burak Aslan ("Developer"), the developer of
-   LeoNet Pro v1.0.1 ("Software"), and the individual or organization using
+   LeoNet Pro v1.1.0 ("Software"), and the individual or organization using
    the Software ("User").
 
 2. LICENSE
