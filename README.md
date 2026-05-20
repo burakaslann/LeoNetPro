@@ -1,4 +1,4 @@
-# LeoNet Pro v1.0.1 🦁
+# LeoNet Pro v1.1.0 🦁
 
 **Network Diagnostics & Internet Speed Test Desktop Application**
 
@@ -6,17 +6,30 @@ LeoNet Pro is a desktop network diagnostics and speed testing application for Wi
 
 ---
 
-## What's New in v1.0.1
+## What's New in v1.1.0
 
-- ⚡ **iPerf3 v3.21 upgrade** — migrated to a Windows build with bundled runtime DLL dependencies, replacing older incompatible builds
-- 🛠 **iPerf3 compatibility fix** — resolved EXE/Setup errors (permission denied, missing entry points, DLL issues)
-- 📦 **Bundled iPerf3 runtime** — required DLL files are included and installed automatically
-- 🌐 **Full localization on Diagnostics tab** — All cards, status messages, and grades now switch instantly with the UI language.
-- 🎨 **Translated theme names** — Theme selector respects the active language.
-- 📡 **Ping monitor translations** — Connected / No Connection / High Ping / Stopped / Monitoring.
-- 🔧 **Better cache handling** — Diagnostic results stay in sync when language is switched mid-session.
+- 📡 **Real Wi-Fi scanning via WlanScan API** — Windows API-driven scan instead of relying on `netsh` cache, signal values now update accurately when moving between rooms
+- 📶 **BSSID-based Wi-Fi table** — multi-AP and mesh networks now show every radio as a separate row instead of collapsing into one
+- 🔬 **Wi-Fi Detail Panel** — vendor lookup (289-entry MAC OUI database), Wi-Fi mode (Wi-Fi 4/5/6/6E/7), Max Data Rate, Spatial Streams, MCS Index, MU-MIMO/OFDMA capability
+- 📊 **Live signal panel** — large dBm display with color-coded rating (Excellent / Good / Fair / Weak), real-time signal-time graph
+- 🎚 **Three filter toggles** — Show Hidden Networks, Show All Networks (including BSSIDs without measurable signal), Group SSIDs
+- ⚡ **iPerf3 live chart** — bandwidth visualized as a real-time line chart during the test, advanced custom command box
+- 🖼 **OCR drag-drop expanded** — PNG, JPG, BMP, WebP, TIFF support, multi-file batch processing
+- 🌐 **Full English UI coverage** — 8 hardcoded Turkish strings (OCR errors, copy feedback, dialog titles) moved to translation dictionary; 472 i18n keys total
+- 🔄 **Manual update check** — Settings → About → "Check for Updates" button, cache bypass, dialog feedback in all states
+- 🛠 **Setup wizard localization** — Inno Setup language selection (Turkish / English) now updates component, task, and run descriptions
 
-See the full [v1.0.1 release notes](https://github.com/burakaslann/LeoNetPro/releases/tag/v1.0.1).
+### Wi-Fi Bug Fixes
+
+- ✅ **Width parsing fix** — connected network's channel width no longer leaks into other BSSIDs of the same SSID (e.g., 2.4 GHz BSSID was showing 80 MHz)
+- ✅ **Detail panel auto-refresh** — selection now persists after a scan, no need to re-click; live dBm and table value stay in sync
+- ✅ **Channel Map parsing** — handles `"12 (4 %)"` style channel values, label clipping fixed
+- ✅ **Band detection** — channel-number-first logic (1–14 → 2.4 GHz, 15–177 → 5 GHz, >177 → 6 GHz) instead of relying on `netsh` band string
+- ✅ **MAC OUI duplicates** — `44:94:FC` and `78:8A:20` corrected to match the IEEE registry
+- ✅ **Auto-update fix** — moved from `QTimer.singleShot` (silently failed from background thread) to a thread-safe `pyqtSignal`
+- ✅ **Splash sync** — splash now closes via `progress_completed` signal instead of a fixed timer
+
+See the full [v1.1.0 release notes](https://github.com/burakaslann/LeoNetPro/releases/tag/v1.1.0).
 
 ---
 
@@ -33,7 +46,7 @@ See the full [v1.0.1 release notes](https://github.com/burakaslann/LeoNetPro/rel
 
 ## Download
 
-👉 **[Download the latest release (LeoNetPro_Setup_v1.0.1.exe)](https://github.com/burakaslann/LeoNetPro/releases/latest)**
+👉 **[Download the latest release (LeoNetPro_Setup_v1.1.0.exe)](https://github.com/burakaslann/LeoNetPro/releases/latest)**
 
 No Python or pip required. Just download and run the setup wizard.
 
@@ -45,6 +58,7 @@ No Python or pip required. Just download and run the setup wizard.
 - ⚡ **Internet Speed Test** — Speedtest CLI (Ookla) integration; download, upload and ping results
 - 🌐 **iPerf3 Real Throughput Testing** — parallel streams, bandwidth cap, continuous traffic mode, live server log with `--logfile` polling
 - 🔀 iPerf3 Integration — bundled Windows build (v3.21) with required DLL dependencies
+- 📊 **iPerf3 Live Chart** — real-time line chart of bandwidth during the test, second-by-second line streaming via `Popen + -i 1`
 - 🖥️ **iPerf3 Server Mode** — built-in server with live log output, automatic port cleanup on restart
 - 🚀 **LibreSpeed Test** — browser-based speed test, no external binary required
 - ☁️ **Cloudflare Fallback Speed Test** — when Speedtest CLI is not installed, manual-only download/upload/ping measurement via Cloudflare's public endpoints (rate-limited, not used in scheduled tests)
@@ -68,7 +82,11 @@ No Python or pip required. Just download and run the setup wizard.
 - 🗺️ **Traceroute** — live hop-by-hop display with per-hop timeout
 
 ### Wi-Fi
-- 📶 **Wi-Fi Scanner** — SSID list with signal (dBm), channel, band (2.4 / 5 / 6 GHz), security type + channel map
+- 📶 **Real-time Wi-Fi Scanner** — WlanScan API call triggers a fresh scan (not cached), 3.5 s scan delay; auto-scan defaults to ON with 15 s interval
+- 📊 **BSSID-based table** — every radio of a multi-AP/mesh network shown as a separate row, vendor inferred from MAC OUI (289-entry database)
+- 🔬 **Detail Panel** — Entity (SSID, BSSID, Vendor), Stats (signal + rating), Configuration (channel/width, security, basic rates), Capabilities (Wi-Fi mode, max rate, MIMO, OFDMA), Signal History (live graph + large color-coded dBm display)
+- 🗺 **Channel Map** — separate plots for 2.4 / 5 / 6 GHz, signal strength as a triangle (base = channel width)
+- 🎚 **Filter toggles** — Show Hidden Networks (default off), Show All Networks (default off, includes BSSIDs without measurable signal), Group SSIDs (default on)
 
 ### Reporting & History
 - 🔬 **TR-143 OCR Analysis** — automatic speed value extraction from screenshots via Tesseract OCR
@@ -85,7 +103,7 @@ No Python or pip required. Just download and run the setup wizard.
 
 ### Customization
 - 🎨 **6 Themes** — Light, Dark Navy, Forest Green, Sunset Orange, Cherry Blossom, Midnight Black (theme names localized per UI language)
-- 🇹🇷 🇬🇧 **Turkish / English** — instant language switch, no restart required; all diagnostic cards, grades, and status messages translate live
+- 🇹🇷 🇬🇧 **Turkish / English** — instant language switch, no restart required; 472 i18n keys cover the full UI including OCR, iPerf3, dialogs, and setup wizard
 - ⏱️ **Auto Test** — scheduled speed test every N minutes (requires Speedtest CLI)
 - 🔊 **Sound Effects** — click and alert sounds with mute toggle
 - 📐 **Mini Widget** — floating mini speed display
@@ -96,7 +114,7 @@ No Python or pip required. Just download and run the setup wizard.
 
 ### 1. Download Setup
 
-Go to [Releases](https://github.com/burakaslann/LeoNetPro/releases) and download `LeoNetPro_Setup_v1.0.1.exe`.
+Go to [Releases](https://github.com/burakaslann/LeoNetPro/releases) and download `LeoNetPro_Setup_v1.1.0.exe`.
 
 Run the setup wizard — iPerf3 is included as an optional component (enabled by default) and will be installed with all required DLL files.
 
@@ -142,11 +160,11 @@ Double-click `LeoNet Pro` from the desktop shortcut or Start Menu.
 | # | Tab | Content |
 |---|-----|---------|
 | 0 | 🏠 Home | TR-143 calculator, OCR, speed test, live gauges, stopwatch |
-| 1 | ⚡ iPerf3 / LibreSpeed | iPerf3 client & server, LibreSpeed, Ping/TCP Port/UDP Port/DNS/Traceroute |
+| 1 | ⚡ iPerf3 / LibreSpeed | iPerf3 client & server (with live chart), LibreSpeed, Ping/TCP Port/UDP Port/DNS/Traceroute |
 | 2 | 📊 History | SQLite history table, trend charts, CSV/DB export, summary report |
 | 3 | 🔬 Diagnostics | Live ping monitor, full network diagnostics, outage log, quality score |
-| 4 | 📶 Wi-Fi | Scanner, 2.4/5/6 GHz channel map |
-| 5 | ⚙️ Settings | Language, theme, email/webhook alerts, sound toggle |
+| 4 | 📶 Wi-Fi | Real-time scanner, BSSID-based table, detail panel, 2.4/5/6 GHz channel map |
+| 5 | ⚙️ Settings | Language, theme, email/webhook alerts, sound toggle, manual update check |
 
 ---
 
@@ -235,3 +253,4 @@ See [EULA.txt](EULA.txt) for full terms.
 Developed by **Burak Aslan**
 
 📧 GitHub: [github.com/burakaslann/LeoNetPro](https://github.com/burakaslann/LeoNetPro)
+🔗 LinkedIn: [Burak ASLAN](https://www.linkedin.com/in/burak-aslan-/)
