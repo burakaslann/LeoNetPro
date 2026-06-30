@@ -1,4 +1,4 @@
-# LeoNet Pro v1.1.0 — Kullanım Kılavuzu / User Guide
+# LeoNet Pro v1.1.1 — Kullanım Kılavuzu / User Guide
 
 > 🇹🇷 **Türkçe** — aşağıda Türkçe rehber yer alıyor.
 > 🇬🇧 **English** — scroll down to the English section.
@@ -41,7 +41,7 @@
 
 ### İlk Kurulum (5 dakika)
 
-1. **LeoNet Pro'yu yükle** — `LeoNetPro_Setup_v1.1.0.exe` dosyasını çalıştır
+1. **LeoNet Pro'yu yükle** — `LeoNetPro_Setup_v1.1.1.exe` dosyasını çalıştır
 2. Kurulum sırasında dil olarak **Türkçe** seç
 3. iPerf3 ve Tesseract OCR bileşenlerini **işaretli bırak** (önerilir)
 4. Kurulum bitince **masaüstü kısayolundan** uygulamayı başlat
@@ -369,6 +369,20 @@ Beşinci sekme. **Çevredeki kablosuz ağların derin analizi** — profesyonel 
 - Açıkken: Aynı SSID'liler **alt alta**, en güçlü sinyal en üstte
 - Kapalıyken: Tüm BSSID'ler **saf sinyal sıralaması** (karışabilir)
 
+### 🔎 SSID Arama (v1.1.1)
+
+Üst bardaki **🔎 SSID ara...** kutusuna yazarak tabloyu anlık filtreleyebilirsin:
+- Yazdıkça eşleşmeyen satırlar gizlenir (silinmez)
+- Arama kutusunu temizleyince hepsi geri gelir (yeniden tarama gerekmez)
+- Sayaç güncellenir (örn "5 / 61")
+- Tarama devam ederken bile filtre korunur
+
+Kalabalık ortamlarda (50+ ağ) belirli bir SSID'yi hızlıca bulmak için ideal.
+
+### ↔️ Sütun Genişletme (v1.1.1)
+
+Tablo sütunlarını **kenarından sürükleyerek** genişletebilirsin. Özellikle uzun SSID veya BSSID değerleri için faydalı.
+
 ### 📊 BSSID Bazlı Tablo
 
 Her BSSID kendi satırında. Mesh sistemleri için **çok değerli**:
@@ -635,7 +649,7 @@ Evet — kişisel kullanım için herhangi bir sınır yok.
 
 ### First Setup (5 minutes)
 
-1. **Install LeoNet Pro** — run `LeoNetPro_Setup_v1.1.0.exe`
+1. **Install LeoNet Pro** — run `LeoNetPro_Setup_v1.1.1.exe`
 2. Select **English** as the installation language
 3. Keep **iPerf3** and **Tesseract OCR** components checked (recommended)
 4. After installation, launch from the **desktop shortcut**
@@ -955,6 +969,20 @@ Top bar has 3 checkboxes:
 - When on, same-SSID rows kept adjacent, strongest signal on top
 - When off, all BSSIDs in **pure signal order**
 
+### 🔎 SSID Search (v1.1.1)
+
+Type in the **🔎 Search SSID...** box in the top bar to filter the table instantly:
+- Non-matching rows are hidden as you type (not deleted)
+- Clearing the box restores all rows (no rescan needed)
+- The counter updates (e.g. "5 / 61")
+- The filter persists across scans
+
+Ideal for quickly finding a specific SSID in crowded environments (50+ networks).
+
+### ↔️ Column Resizing (v1.1.1)
+
+Resize table columns by **dragging the column borders**. Useful for long SSID or BSSID values.
+
 ### 📊 BSSID-Based Table
 
 Each BSSID gets its own row. Very valuable for mesh systems:
@@ -1212,7 +1240,7 @@ Yes — no limit for personal use.
 **Author:** Burak Aslan
 **LinkedIn:** [Burak ASLAN](https://www.linkedin.com/in/burak-aslan-/)
 **GitHub:** [github.com/burakaslann/LeoNetPro](https://github.com/burakaslann/LeoNetPro)
-**Version:** 1.1.0
+**Version:** 1.1.1
 
 For bug reports or feature suggestions:
 [github.com/burakaslann/LeoNetPro/issues](https://github.com/burakaslann/LeoNetPro/issues)
