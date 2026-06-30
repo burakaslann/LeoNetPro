@@ -1,8 +1,19 @@
-# LeoNet Pro v1.1.0 🦁
+# LeoNet Pro v1.1.1 🦁
 
 **Network Diagnostics & Internet Speed Test Desktop Application**
 
 LeoNet Pro is a desktop network diagnostics and speed testing application for Windows 10/11. Speed testing, live ping monitoring, Wi-Fi scanning, advanced network diagnostics, iPerf3 throughput testing, and report export — all in a single interface with 6 themes and Turkish/English language support.
+
+---
+
+## What's New in v1.1.1
+
+- 🔧 **Band detection fix** — Channel-to-band mapping now uses the real IEEE 5 GHz channel list; channels like 63 and 85 on Wi-Fi 6E/7 radios are correctly identified as 6 GHz
+- 📏 **Channel width fix** — 2.4 GHz networks no longer show impossible widths (capped at 20/40 MHz)
+- ↔️ **Resizable columns** — drag column borders to resize the Wi-Fi table
+- 🔎 **SSID search box** — filter the Wi-Fi table instantly by SSID name
+
+See the full [v1.1.1 release notes](https://github.com/burakaslann/LeoNetPro/releases/tag/v1.1.1).
 
 ---
 
@@ -46,7 +57,7 @@ See the full [v1.1.0 release notes](https://github.com/burakaslann/LeoNetPro/rel
 
 ## Download
 
-👉 **[Download the latest release (LeoNetPro_Setup_v1.1.0.exe)](https://github.com/burakaslann/LeoNetPro/releases/latest)**
+👉 **[Download the latest release (LeoNetPro_Setup_v1.1.1.exe)](https://github.com/burakaslann/LeoNetPro/releases/latest)**
 
 No Python or pip required. Just download and run the setup wizard.
 
@@ -114,7 +125,7 @@ No Python or pip required. Just download and run the setup wizard.
 
 ### 1. Download Setup
 
-Go to [Releases](https://github.com/burakaslann/LeoNetPro/releases) and download `LeoNetPro_Setup_v1.1.0.exe`.
+Go to [Releases](https://github.com/burakaslann/LeoNetPro/releases) and download `LeoNetPro_Setup_v1.1.1.exe`.
 
 Run the setup wizard — iPerf3 is included as an optional component (enabled by default) and will be installed with all required DLL files.
 
