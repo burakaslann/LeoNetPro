@@ -1,4 +1,4 @@
-LeoNet Pro v1.1.0
+LeoNet Pro v1.1.1
 Copyright (c) 2025-2026 Burak Aslan
 Tüm hakları saklıdır. / All rights reserved.
 
@@ -103,3 +103,4 @@ matplotlib
 PyQt5
   License : GPL v3 / Riverbank Commercial License
   Source  : https://riverbankcomputing.com/software/pyqt
+
