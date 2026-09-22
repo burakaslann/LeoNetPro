@@ -1,4 +1,4 @@
-# LeoNet Pro v1.1.1 — Kullanım Kılavuzu / User Guide
+# LeoNet Pro v1.2.0 — Kullanım Kılavuzu / User Guide
 
 > 🇹🇷 **Türkçe** — aşağıda Türkçe rehber yer alıyor.
 > 🇬🇧 **English** — scroll down to the English section.
@@ -37,26 +37,45 @@
 
 ---
 
+## v1.2.0: NIC seçimi, sağ tık ve güncelleme
+
+**Ping kaynak IP seçimi:** Tanılama sekmesindeki Çıkış NIC listesinden etkin kartın IPv4 adresini seç. Otomatik, kaynak IP zorlamasını kaldırır. Kart takıp çıkardıysan yenile düğmesini kullan; seçimi test başlamadan yap. Destekleyen ping komutları Windows'ta `-S` kaynak IP parametresini kullanır. Windows yönlendirmesi ve hedefin erişilebilirliği geçerlidir. Bu seçenek Ookla, DNS, HTTP veya iPerf trafiğinin tamamını seçilen karta bağlamaz; fiziksel çıkış yolunu kesinleştirmek için ayrıca doğrulama gerekir.
+
+**Sağ tık menüsü:** Uygulama alanında sağ tıkla; hesaplama, hız testi, OCR, PDF, sekme geçişi ve çıkış gibi işlemlere eriş. Bazı metin/tablo alanları kendi yerel menülerini gösterebilir. Etiketler etkin dil ve temaya göre oluşturulur.
+
+### PySide6 ve testlerin birlikte kullanımı
+
+- **PySide6 / Qt 6 geçişi:** Arayüz PyQt5 yerine PySide6 kullanıyor.
+- **Thread yaşam döngüsü:** Çalışan işçilerin referansları korunuyor; çıkışta işçilerin bitmesi bekleniyor.
+- **Ping Monitor:** Start/Stop sırasında buton durumu güncelleniyor; işçi sonlanana kadar yeniden başlatma kısa süre devre dışı kalabilir.
+- **Testlerin birlikte kullanımı:** Speedtest + Ping ve iPerf3 + Ping kullanılabilir. Özel iPerf dahil ağır hız testlerinin eşzamanlı başlatılması engellenir. Bufferbloat içeren tanılama paketi de ağır test olarak değerlendirilir.
+
+Ookla CLI indirme/yükleme fazlarının süresini kendi belirler; yaklaşık 5 saniyelik bir faz tek başına hata değildir. iPerf3 süresi ayrı ayarlanır. PySide6 geçişi bir mobil sürüm değildir; bu kılavuz Windows uygulaması içindir.
+
+**Dil:** Ayarlar'dan İngilizce seçildiğinde ping eşiği etiketi Alert, Türkçede Uyarı olur. Bu düzeltme tüm dinamik mesajların veya geçmiş kayıtların eksiksiz çevrildiği garantisi değildir.
+
+**Güncelleme:** GitHub HTTPS isteği certifi CA paketiyle doğrulanır. Hata ayrıntıları `%TEMP%\LeoNetPro-update-UpdateFix4.log` dosyasına yazılabilir; günlük yerel kullanıcı/dosya yolları içerebilir. Paylaşmadan önce incele. Güncelleme kontrolü yeni sürümü otomatik kurmaz. 1.2.0 yayımlanmadan GitHub'da 1.1.1 görülmesi beklenebilir.
+
 ## Hızlı Başlangıç
 
 ### İlk Kurulum (5 dakika)
 
-1. **LeoNet Pro'yu yükle** — `LeoNetPro_Setup_v1.1.1.exe` dosyasını çalıştır
+1. **LeoNet Pro'yu yükle** — `LeoNetPro_Setup_v1.2.0.exe` dosyasını çalıştır
 2. Kurulum sırasında dil olarak **Türkçe** seç
-3. iPerf3 ve Tesseract OCR bileşenlerini **işaretli bırak** (önerilir)
+3. Gereken bileşenleri seç. Tesseract seçeneği yalnızca yükleyicisi pakette varsa görünür; kurulum sonunda ayrı yükleyiciyi çalıştırıp tamamla.
 4. Kurulum bitince **masaüstü kısayolundan** uygulamayı başlat
-5. İlk açılışta tema ve dil otomatik Windows ayarlarına göre seçilir — istersen **Ayarlar** sekmesinden değiştirebilirsin
+5. Dil ve temayı **Ayarlar** sekmesinden seç; seçimler sonraki açılışlar için saklanır.
 
-### Speedtest CLI Kurulumu (ZORUNLU)
+### Speedtest CLI Kurulumu (Ookla ve zamanlanmış testler için)
 
 İnternet hız testi için Ookla'nın resmi aracı gerekli (yasal sebeplerle uygulamaya gömülmedi):
 
 1. https://www.speedtest.net/apps/cli adresine git
 2. **Windows** sürümünü indir (zip dosyası)
-3. Zip'i aç, `speedtest.exe` dosyasını **`C:\Windows`** veya **`C:\Program Files\Speedtest`** klasörüne kopyala
+3. Zip'i aç, `speedtest.exe` dosyasını **LeoNet Pro EXE'sinin bulunduğu klasöre** kopyala
 4. LeoNet Pro'yu yeniden başlat — otomatik bulur
 
-**Alternatif:** Speedtest CLI yoksa **Cloudflare** üzerinden manuel test yapabilirsin (saatte birkaç kez sınırlı).
+**Alternatif:** Speedtest CLI yoksa **Cloudflare** üzerinden manuel test yapabilirsin (manuel; testler arasında en az 30 saniye bekleme).
 
 ### İlk Test
 
@@ -142,7 +161,7 @@ iPerf3 bant genişliği test aracıdır. Public server'lara veya kendi server'ı
 **Adım adım kullanım:**
 
 1. **Sunucu** kutusuna server adresi gir:
-   - Public: `iperf.he.net`, `bouygues.iperf.fr`, `speedtest.hetzner.de`
+   - Public: kullanım izni olan ve o anda erişilebilir bir iPerf3 sunucusu
    - Yerel: `192.168.1.50` gibi LAN IP'si
 2. **Port** kutusu (default `5201`)
 3. **Süre** (default `10` saniye)
@@ -160,7 +179,7 @@ iPerf3 bant genişliği test aracıdır. Public server'lara veya kendi server'ı
 İleri kullanıcılar için — iPerf3'ün tüm parametrelerini yazabilirsin:
 
 ```
--c iperf.he.net -p 5201 -t 30 -P 4 --reverse
+-c 192.168.1.50 -p 5201 -t 30 -P 4 --reverse
 ```
 
 **Yaygın komutlar:**
@@ -179,13 +198,13 @@ iPerf3 bant genişliği test aracıdır. Public server'lara veya kendi server'ı
 
 ```
 # Download testi (server senin yönüne basıyor)
--c iperf.he.net -t 30 -P 4 --reverse
+-c 192.168.1.50 -t 30 -P 4 --reverse
 
 # Çift yönlü stres testi (bufferbloat için)
--c iperf.he.net -t 30 --bidir
+-c 192.168.1.50 -t 30 --bidir
 
 # UDP — packet loss / jitter
--c iperf.he.net -t 10 -u -b 50M
+-c 192.168.1.50 -t 10 -u -b 50M
 
 # Yerel LAN testi (modem ↔ PC)
 -c 192.168.1.50 -t 10
@@ -203,7 +222,7 @@ PC'ni bir test sunucusu yapar. Başka bir cihazdan bağlanıp test yapabilirsin 
 5. Sunucu modu kapatınca port otomatik temizlenir
 
 **CPE Saha Senaryosu:**
-Müşteri evinde modem test ediyorsun, internet kesik. Telefonunu PC'ne hotspot yap, telefonu PC1, iPerf3 server PC1'de, modem alın PC2'den client testi → modem WAN'sız bile LAN performansını ölçersin.
+İki Windows bilgisayarı aynı yerel ağa bağla. Birinde iPerf3 sunucusu başlat; diğerinden o bilgisayarın LAN IP adresine istemci testi yap. Bu test internet hızını değil iki cihaz arasındaki yolu ölçer.
 
 ### 🌐 LibreSpeed
 
@@ -212,7 +231,7 @@ Tarayıcı tabanlı hız testi. Speedtest CLI olmasa bile çalışır.
 **Kullanım:**
 1. **LibreSpeed Aç** butonuna tıkla
 2. Tarayıcıda yeni sekme açılır
-3. Otomatik test başlar — sonuç tarayıcıda görünür
+3. Açılan test arayüzünde testi başlat; sonuçların gösterildiği yeri kontrol et
 
 **Avantajı:** Speedtest CLI gerektirmez. Dezavantajı: sonuç otomatik geçmişe kaydolmaz.
 
@@ -252,7 +271,7 @@ Zaman serisi grafikler:
 - **Upload** zaman içinde
 - **Ping** zaman içinde
 
-Tema rengine uyumlu renkler. Sağ tık → ölçek değiştir, dışa aktar.
+Grafikler tema renklerini kullanır. Dışa aktarma için uygulamadaki ilgili düğmeleri kullan.
 
 ### 💾 Dışa Aktarma
 
@@ -262,7 +281,7 @@ Tema rengine uyumlu renkler. Sağ tık → ölçek değiştir, dışa aktar.
 |---|---|
 | **CSV** | Excel'de açmak için |
 | **DB** | Tüm SQLite veritabanını yedeklemek için |
-| **PDF Rapor** | TR-143 uyumlu profesyonel rapor (müşteriye sunmak için) |
+| **PDF Rapor** | TR-143 test verilerinden oluşturulan PDF raporu |
 | **Özet Rapor** | İstatistiksel özet (ortalama/min/maks, başarı oranı) |
 
 ---
@@ -291,17 +310,17 @@ CPE testlerinde "bu modem bir saatte 3 kez bağlantı kesmiş" tarzı tespit iç
 
 ### 🔬 Tanılama Testleri
 
-**Tam Tanılama Yap** butonuyla **13 ayrı test** aynı anda çalışır:
+**Tam Tanılama Yap** butonuyla tanılama adımları sırayla yürütülür:
 
 | Test | Yöntem | Ne Söyler |
 |---|---|---|
 | **Paket Kaybı** | 20× ICMP ping | Bağlantı güvenilirliği (%) |
-| **Jitter** | RFC 3550 | Pingler arası dalgalanma (VoIP/IPTV kalitesi) |
+| **Jitter** | Ardışık ping RTT farkları | Ortalama mutlak gidiş-dönüş süresi değişkenliği |
 | **Ortalama Ping** | 20× ICMP | Gidiş-dönüş süresi |
-| **MTU Discovery** | DF bit ile ikili arama | Yolun maks paket boyutu (576-1500), VPN/PPPoE tespiti |
+| **MTU Discovery** | DF bit ile ikili arama | Yanıtlara bağlı MTU tahmini; VPN/PPPoE yorumu kesin tespit değildir |
 | **Bufferbloat** | Çift yönlü yük + ping | A-F notu (yük altında gecikme) |
 | **DNS Latency** | UDP × 3 | 5 DNS sağlayıcının medyan gecikmesi |
-| **DNSSEC** | Cloudflare DoH AD flag | ISP DNS güvenlik doğrulaması yapıyor mu |
+| **DNSSEC** | Cloudflare DoH AD flag | Cloudflare yanıtında AD bayrağı; ISP doğrulaması değildir |
 | **DoH** | HTTPS probe | DNS over HTTPS çalışıyor mu |
 | **DoT** | TLS port 853 | DNS over TLS çalışıyor mu |
 | **DNS Leak** | whoami.akamai.net | Asıl DNS sunucun kim (VPN leak tespiti) |
@@ -329,9 +348,9 @@ Müşteri "internetim yavaş" diyor. Ne yapayım?
    - Ping: 12 ms ✅
    - Jitter: 35 ms ❌ (10 ms üstü kötü)
    - Bufferbloat: D ❌
-   - Packet Loss: 2.3% ❌
-4. **Yorum:** "Hız iyi ama jitter/bufferbloat kötü → modem QoS sorunu"
-5. **Çözüm:** Modem ayarlarında QoS aktifleştir, yeniden test et
+   - Packet Loss: 5% ❌
+4. **Yorum:** Yük altında gecikme var; bunun nedeni tek başına bu sonuçtan belirlenemez.
+5. Kablolu bağlantıyla ve aynı hedefle karşılaştır; ağ yükünü kontrol et. QoS değişikliğini kendi cihazının belgelerine göre değerlendir.
 
 ---
 
@@ -343,7 +362,7 @@ Beşinci sekme. **Çevredeki kablosuz ağların derin analizi** — profesyonel 
 
 **Kullanım:**
 1. **Tara** butonuna tıkla (veya otomatik tarama bekle)
-2. Windows `WlanScan` API tetiklenir — **gerçek tarama** (cache değil)
+2. Windows `WlanScan` API tetiklenir — tarama isteği; sonuçlar gecikmeli veya önbellekten olabilir
 3. ~3.5 saniye bekle
 4. Tablo dolar
 
@@ -369,7 +388,7 @@ Beşinci sekme. **Çevredeki kablosuz ağların derin analizi** — profesyonel 
 - Açıkken: Aynı SSID'liler **alt alta**, en güçlü sinyal en üstte
 - Kapalıyken: Tüm BSSID'ler **saf sinyal sıralaması** (karışabilir)
 
-### 🔎 SSID Arama (v1.1.1)
+### 🔎 SSID Arama (v1.1.1 ile eklendi)
 
 Üst bardaki **🔎 SSID ara...** kutusuna yazarak tabloyu anlık filtreleyebilirsin:
 - Yazdıkça eşleşmeyen satırlar gizlenir (silinmez)
@@ -379,7 +398,7 @@ Beşinci sekme. **Çevredeki kablosuz ağların derin analizi** — profesyonel 
 
 Kalabalık ortamlarda (50+ ağ) belirli bir SSID'yi hızlıca bulmak için ideal.
 
-### ↔️ Sütun Genişletme (v1.1.1)
+### ↔️ Sütun Genişletme (v1.1.1 ile eklendi)
 
 Tablo sütunlarını **kenarından sürükleyerek** genişletebilirsin. Özellikle uzun SSID veya BSSID değerleri için faydalı.
 
@@ -424,13 +443,13 @@ Tabloda bir satıra tıkla → sağdaki panel 5 bölümle dolar:
 #### 4. Yetenekler (Capabilities)
 - **WiFi Mode** — Wi-Fi 4 (n), Wi-Fi 5 (ac), Wi-Fi 6 (ax), Wi-Fi 6E, Wi-Fi 7 (be)
 - **Max Data Rate** — Teorik tepe hız (örn 1200.9 Mbps)
-- **Spatial Streams** — Anten sayısı (1, 2, 4...)
+- **Spatial Streams** — Uzamsal akış sayısı tahmini; fiziksel anten sayısını doğrulamaz
 - **Max MCS Index** — Modülasyon endex (0-11)
 - **Additional** — MU-MIMO, OFDMA, BSS Coloring
 
 #### 5. Sinyal Zamanı (Signal History)
 - **Üstte büyük dBm gösterge** — 18pt, renk kodlu
-- **Altında canlı grafik** — saniyelik sinyal değişimi
+- **Altında canlı grafik** — son alınan sinyal değerlerinin gösterimi
 - Sürekli güncellenir (otomatik tarama açıksa)
 
 ### 🗺 Kanal Haritası
@@ -455,7 +474,7 @@ Her ağ **üçgen** olarak çizilir:
 Müşteri "evimin bir köşesinde Wi-Fi zayıf" diyor.
 
 1. **Otomatik tarama** AÇIK bırak
-2. Telefonu kapı kapı dolaştır (Wi-Fi uçtaki noktalara git)
+2. Windows uygulamasının çalıştığı dizüstü bilgisayarla farklı odalara git; her noktada yeni tarama sonucunu bekle
 3. **Sinyal Zamanı grafiğine** bak — hangi BSSID güçlü, hangisi zayıf?
 4. **Detail panel**'den vendor'a bak (modem mi mesh node mu?)
 5. **Channel Map**'te 2.4 GHz çakışması var mı kontrol et
@@ -511,7 +530,7 @@ Tema isimleri aktif UI diline göre çevrilir.
 2. GitHub Releases API'sine sorgu yapılır
 3. 3 olası sonuç:
    - **Güncel** — En son sürümdesin
-   - **Yeni sürüm var** — İndirme sayfası açılır
+   - **Yeni sürüm var** — Sürüm bilgisi ve indirme seçeneği gösterilir
    - **Hata** — İnternet yok veya GitHub erişilemiyor
 
 **Otomatik kontrol:** Günde 1 kez, uygulama açılışında otomatik kontrol edilir (sessiz).
@@ -546,10 +565,10 @@ Tema isimleri aktif UI diline göre çevrilir.
 
 **Çözüm:**
 1. https://www.speedtest.net/apps/cli indir
-2. `speedtest.exe`'yi `C:\Windows` veya `C:\Program Files\Speedtest` içine kopyala
+2. `speedtest.exe`'yi LeoNet Pro EXE'sinin bulunduğu klasörün içine kopyala
 3. Uygulamayı yeniden başlat
 
-**Alternatif:** Ayarlar → Cloudflare fallback'i kullan (manuel, sınırlı)
+**Alternatif:** CLI bulunmadığında sunulan manuel Cloudflare yedek testini kullan.
 
 ### ❌ Wi-Fi taraması boş çıkıyor
 
@@ -565,7 +584,7 @@ Tema isimleri aktif UI diline göre çevrilir.
 ### ❌ iPerf3 "unable to connect to server"
 
 **Sebep 1:** Sunucu kapalı
-- Farklı sunucu dene: `bouygues.iperf.fr`, `speedtest.hetzner.de`
+- Farklı sunucu dene: `192.168.1.50` (örnek/example; kendi sunucunuzu kullanın/use your own server)
 
 **Sebep 2:** Güvenlik duvarı engelliyor
 - Windows Defender → Gelen kurallar → 5201 portu açık mı kontrol et
@@ -601,27 +620,38 @@ Tema isimleri aktif UI diline göre çevrilir.
 
 **Çözüm:**
 1. Denetim Masası → Uygulamayı kaldır
-2. `%APPDATA%/LeoNetPro` klasörünü sil (ayarlar sıfırlanır)
+2. Silme işlemi yapmadan önce DB/CSV dışa aktarımıyla geçmişi yedekle; hata mesajını ve sürümü kaydet
 3. En son setup'ı yeniden yükle
 
 ---
 
 ## Sıkça Sorulan Sorular
 
-### Bu uygulama veri topluyor mu?
+### Bu uygulama hangi verileri saklar ve hangi bağlantıları kurar?
 
-**Hayır.** Tüm test sonuçları yerel SQLite veritabanında saklanır (`%APPDATA%/LeoNetPro/history.db`). Hiçbir veri sunucuya gönderilmez.
+Test geçmişi yerel bilgisayarda tutulur. Ağ işlemleri harici hizmetlere bağlanır; bu hizmetler genel IP adresiniz gibi bağlantı bilgilerini ve işlem için gereken istekleri alır. Etkinleştirilen e-posta/webhook bildirimleri, bildirim içeriğini yapılandırdığınız hedeflere gönderir.
 
-Sadece şu kullanıcı-başlattığı bağlantılar yapılır:
-- Speedtest CLI sunucuları (hız testi sırasında)
-- Cloudflare CDN (fallback hız testi)
-- GitHub Releases API (güncelleme kontrolü, opsiyonel)
+Ağ etkinlikleri şunları kapsar:
+- Testlerde Speedtest CLI (Ookla), LibreSpeed ve iPerf3 bağlantıları; etkinleştirildiğinde zamanlanmış Speedtest CLI testleri.
+- Manuel yedek hız testi ve bufferbloat tanılamasında Cloudflare indirme/yükleme istekleri; tanılama sırasında DNS sağlayıcıları ve Akamai çözücü kontrolleri.
+- Tanılama hedeflerine ICMP, DNS, TCP ve UDP sorguları. Kesinti izleyicisi uygulamayla birlikte otomatik başlar.
+- Açılışta otomatik (başarılı kontrolden sonra günde en fazla bir kez) ve elle başlatılan GitHub güncelleme kontrolleri.
+- Varsayılan olarak otomatik başlayan, Windows ve sürücü davranışına bağlı yerel Wi-Fi taraması.
+- Yapılandırılıp etkinleştirilen e-posta/webhook bildirimleri.
+
+Zamanlanmış hız testi özelliği Cloudflare yedek hız testini kullanmaz. Üçüncü taraf hizmetlerin kendi gizlilik politikaları ve kullanım koşulları geçerlidir. Arka planda hiçbir harici bağlantı kurulmadığı iddia edilmez.
 
 ### Verilerim nerede saklanıyor?
 
-- **Veritabanı:** `%APPDATA%/LeoNetPro/history.db`
-- **Ayarlar:** Windows Registry — `HKCU\Software\Burak Aslan\LeoNet Pro`
-- Bilgisayarını silmediğin sürece tüm geçmiş kayıt durur.
+- **Veritabanı:** `%TEMP%\hiz_testleri.db` (bu sürümün kullandığı konum). Uygulamadaki DB dışa aktarımıyla yedekleyin.
+- **Ayarlar:** Windows Registry üzerinden QSettings; ana anahtar `HKCU\Software\BurakAslan\LeoNetPro`. iPerf özel komut ayarları ayrıca `HKCU\Software\LeoNetPro\iperf_custom` altında tutulur. Rastgele Registry anahtarı silmeyin.
+- Windows geçici klasör temizliği geçmişi silebilir. Güncelleme veya yeniden kurulumdan önce yedek alın.
+
+### Ölçüm sınırlamaları
+
+Bu sonuçlar tanılama tahminleridir; sertifikasyon sonucu değildir. Wi-Fi dBm değeri Windows sinyal yüzdesinden hesaplanır: `floor(sinyal_yüzdesi / 2) - 100`. Windows bildirmediğinde kanal genişliği, azami veri hızı ve radyo yetenekleri tahmin edilebilir. Bazı tahminler yıldızla işaretlenir; yıldız bulunmaması doğrudan donanım ölçümü yapıldığını kanıtlamaz. Tarama verisi gecikmeli veya önbellekten olabilir; grafiğin yenilenmesi yeni radyo örneği alındığı anlamına gelmez.
+
+Jitter, ardışık ping gidiş-dönüş sürelerindeki değişkenliktir; RFC 3550'deki RTP hesabı değildir. DNSSEC kontrolü Cloudflare DoH yanıtının AD bayrağını okur; ISP çözücünüzün DNSSEC davranışını doğrulamaz. Çözücü IP gözlemi tek başına VPN DNS sızıntısını kanıtlamaz. MTU, bufferbloat ve kalite skoru yanıt alınmasına ve yük üretiminin başarısına bağlıdır. Eksik yanıt veya başarısız yük yanıltıcı sonuç verebilir; önemli ölçümleri tekrarlayın veya başka yöntemle karşılaştırın. PDF raporu TR-143 uygunluğunu belgelemez.
 
 ### Bu uygulamayı şirketimde kullanabilir miyim?
 
@@ -629,11 +659,11 @@ EULA'ya göre **ticari kullanım yasak**. Kişisel ve eğitim amaçlı kullanım
 
 ### Bir sürüm sonra ayarlarım gidiyor mu?
 
-**Hayır.** Installer otomatik upgrade yapar — geçmiş, ayarlar, tema seçimi korunur.
+Geçmiş ve ayarların korunması kurulum/sürüm davranışına bağlıdır. Güncellemeden önce DB/CSV yedeği alın; geçici klasördeki geçmiş için kalıcılık garantisi yoktur.
 
 ### Wi-Fi taraması bilgisayara zarar verir mi?
 
-**Hayır.** WlanScan API Windows'un yerleşik özelliği. Tamamen pasif okuma yapar.
+Uygulama Windows'un yerleşik WlanScan API'siyle tarama ister. Bu işlem yalnızca pasif bir dosya okuması değildir; zamanlama ve radyo davranışı sürücüye bağlıdır.
 
 ### Birden fazla bilgisayara kurabilir miyim?
 
@@ -645,23 +675,42 @@ Evet — kişisel kullanım için herhangi bir sınır yok.
 
 ---
 
+## v1.2.0: Adapter selection, context menu and updates
+
+**Ping source IP:** Choose an active adapter's IPv4 address in Diagnostics → Source NIC. Automatic removes the source-IP override. Refresh after adapter changes and choose before starting a test. Supported Windows ping commands use `-S`; Windows routing and target reachability still apply. This does not bind Ookla, DNS, HTTP or iPerf traffic to that adapter. Verify the actual egress path separately when it matters.
+
+**Context menu:** Right-click the application area for common actions, navigation and exit. Some input/table widgets may display their own native menus. The application menu uses the current language and theme.
+
+**Language:** The ping threshold label refreshes to Alert in English and Uyarı in Turkish. This fix does not guarantee complete translation of every dynamic message or historical record.
+
+### PySide6 and concurrent tests
+
+- **PySide6 / Qt 6 migration:** The interface now uses PySide6 instead of PyQt5.
+- **Thread lifecycle:** Running workers retain their references; application exit waits for them to finish.
+- **Ping Monitor:** Start/Stop updates the button state; restarting may be briefly disabled while the worker finishes.
+- **Concurrent tests:** Speedtest + Ping and iPerf3 + Ping can run together. Concurrent heavy speed tests, including custom iPerf, are blocked. The diagnostics suite includes bufferbloat and is also treated as a heavy test.
+
+Ookla CLI controls its download/upload phase durations; a phase lasting around 5 seconds is not itself an error. iPerf3 duration is configured separately. The PySide6 migration is not a mobile release; this guide covers the Windows application.
+
+**Updates:** GitHub HTTPS requests validate against the certifi CA bundle. Errors may be logged to `%TEMP%\LeoNetPro-update-UpdateFix4.log`; this log can contain local usernames and file paths. Review before sharing. Checking for updates does not install a release. GitHub may still report 1.1.1 before 1.2.0 is published.
+
 ## Quick Start
 
 ### First Setup (5 minutes)
 
-1. **Install LeoNet Pro** — run `LeoNetPro_Setup_v1.1.1.exe`
+1. **Install LeoNet Pro** — run `LeoNetPro_Setup_v1.2.0.exe`
 2. Select **English** as the installation language
-3. Keep **iPerf3** and **Tesseract OCR** components checked (recommended)
+3. Select the required components. Tesseract is offered only if its installer is bundled; complete its separate installation at the end.
 4. After installation, launch from the **desktop shortcut**
-5. On first launch, theme and language follow Windows settings — change them in **Settings** if needed
+5. Choose language and theme in **Settings**; preferences are saved for later launches.
 
-### Speedtest CLI Setup (REQUIRED)
+### Speedtest CLI Setup (for Ookla and scheduled tests)
 
 For internet speed testing, Ookla's official CLI is needed (not bundled for legal reasons):
 
 1. Go to https://www.speedtest.net/apps/cli
 2. Download the **Windows** version (zip)
-3. Extract `speedtest.exe` to `C:\Windows` or `C:\Program Files\Speedtest`
+3. Extract `speedtest.exe` to the folder containing the LeoNet Pro executable
 4. Restart LeoNet Pro — it will auto-detect
 
 **Alternative:** If Speedtest CLI is missing, use **Cloudflare** fallback (manual, rate-limited).
@@ -747,7 +796,7 @@ iPerf3 is a bandwidth test tool. Test against public servers or your own.
 **Step by step:**
 
 1. **Server** field: enter server address
-   - Public: `iperf.he.net`, `bouygues.iperf.fr`, `speedtest.hetzner.de`
+   - Public: an available iPerf3 server you are permitted to use
    - Local: LAN IP like `192.168.1.50`
 2. **Port** (default `5201`)
 3. **Duration** (default `10` seconds)
@@ -765,7 +814,7 @@ iPerf3 is a bandwidth test tool. Test against public servers or your own.
 For power users — type any iPerf3 argument string:
 
 ```
--c iperf.he.net -p 5201 -t 30 -P 4 --reverse
+-c 192.168.1.50 -p 5201 -t 30 -P 4 --reverse
 ```
 
 **Common commands:**
@@ -784,13 +833,13 @@ For power users — type any iPerf3 argument string:
 
 ```
 # Download test
--c iperf.he.net -t 30 -P 4 --reverse
+-c 192.168.1.50 -t 30 -P 4 --reverse
 
 # Bidirectional stress (for bufferbloat)
--c iperf.he.net -t 30 --bidir
+-c 192.168.1.50 -t 30 --bidir
 
 # UDP — packet loss / jitter
--c iperf.he.net -t 10 -u -b 50M
+-c 192.168.1.50 -t 10 -u -b 50M
 
 # Local LAN test
 -c 192.168.1.50 -t 10
@@ -808,7 +857,7 @@ Makes your PC a test server. Test from another device.
 5. Stop server → port auto-released
 
 **Field Scenario:**
-Testing customer modem, no WAN. Make phone hotspot for PC1, run iPerf3 server on PC1, test from PC2 (modem-only client) → measure LAN even without internet.
+Connect two computers to the same LAN. Start an iPerf3 server on one and test its LAN IP from the other. This measures the path between those devices, not internet speed.
 
 ### 🌐 LibreSpeed
 
@@ -862,7 +911,7 @@ Time-series graphs for Download, Upload, Ping. Theme-aware colors.
 |---|---|
 | **CSV** | Excel-compatible |
 | **DB** | Full SQLite backup |
-| **PDF Report** | TR-143 compliant professional report |
+| **PDF Report** | PDF report generated from TR-143 test data |
 | **Summary Report** | Statistical overview (avg/min/max, pass rate) |
 
 ---
@@ -891,17 +940,17 @@ Ideal for CPE testing: "modem dropped 3 times in an hour" type detection.
 
 ### 🔬 Diagnostic Tests
 
-**Run Full Diagnostics** button runs **13 tests** simultaneously:
+**Run Full Diagnostics** button runs diagnostic steps sequentially:
 
 | Test | Method | What It Tells |
 |---|---|---|
 | **Packet Loss** | 20× ICMP | Reliability (%) |
-| **Jitter** | RFC 3550 | Inter-packet variation (VoIP/IPTV quality) |
+| **Jitter** | Consecutive ping RTT differences | Mean absolute round-trip-time variation |
 | **Avg. Ping** | 20× ICMP | Round-trip average |
-| **MTU Discovery** | Binary search with DF bit | Path MTU (576-1500), VPN/PPPoE detection |
+| **MTU Discovery** | Binary search with DF bit | Reply-dependent MTU estimate; VPN/PPPoE interpretation is heuristic |
 | **Bufferbloat** | Bidirectional load + ping | A-F grade |
 | **DNS Latency** | UDP × 3 | Median latency for 5 providers |
-| **DNSSEC** | Cloudflare DoH AD flag | DNSSEC validation by ISP |
+| **DNSSEC** | Cloudflare DoH AD flag | AD flag in the Cloudflare response; not ISP validation |
 | **DoH** | HTTPS probe | DNS over HTTPS availability |
 | **DoT** | TLS port 853 | DNS over TLS availability |
 | **DNS Leak** | whoami.akamai.net | Real DNS resolver (VPN leak check) |
@@ -929,9 +978,9 @@ Customer says "internet is slow". What do I do?
    - Ping: 12 ms ✅
    - Jitter: 35 ms ❌ (>10 ms is bad)
    - Bufferbloat: D ❌
-   - Packet Loss: 2.3% ❌
-4. **Interpretation:** "Speed OK but jitter/bufferbloat bad → router QoS issue"
-5. **Solution:** Enable QoS in router settings, retest
+   - Packet Loss: 5% ❌
+4. **Interpretation:** Latency rises under load; this result alone does not establish the cause.
+5. Compare over Ethernet with the same target and inspect network load; consult device documentation before changing QoS.
 
 ---
 
@@ -943,7 +992,7 @@ Fifth tab. **Deep Wi-Fi network analysis** — professional grade.
 
 **Usage:**
 1. Click **Scan** (or wait for auto-scan)
-2. Windows `WlanScan` API triggers — **real scan** (not cached)
+2. Windows `WlanScan` API triggers — scan request; returned results may be delayed or cached
 3. Wait ~3.5 seconds
 4. Table populates
 
@@ -969,7 +1018,7 @@ Top bar has 3 checkboxes:
 - When on, same-SSID rows kept adjacent, strongest signal on top
 - When off, all BSSIDs in **pure signal order**
 
-### 🔎 SSID Search (v1.1.1)
+### 🔎 SSID Search (introduced in v1.1.1)
 
 Type in the **🔎 Search SSID...** box in the top bar to filter the table instantly:
 - Non-matching rows are hidden as you type (not deleted)
@@ -979,7 +1028,7 @@ Type in the **🔎 Search SSID...** box in the top bar to filter the table insta
 
 Ideal for quickly finding a specific SSID in crowded environments (50+ networks).
 
-### ↔️ Column Resizing (v1.1.1)
+### ↔️ Column Resizing (introduced in v1.1.1)
 
 Resize table columns by **dragging the column borders**. Useful for long SSID or BSSID values.
 
@@ -1024,13 +1073,13 @@ Click any row → right panel fills with 5 sections:
 #### 4. Capabilities
 - **WiFi Mode** — Wi-Fi 4 (n), Wi-Fi 5 (ac), Wi-Fi 6 (ax), Wi-Fi 6E, Wi-Fi 7 (be)
 - **Max Data Rate** — Theoretical PHY peak (e.g., 1200.9 Mbps)
-- **Spatial Streams** — Antenna count (1, 2, 4...)
+- **Spatial Streams** — Estimated spatial streams; not a verified physical antenna count
 - **Max MCS Index** — Modulation index (0-11)
 - **Additional** — MU-MIMO, OFDMA, BSS Coloring
 
 #### 5. Signal History
 - **Large dBm display** on top — 18 pt, color-coded
-- **Live graph** below — second-by-second
+- **Live graph** below — displays the latest available signal values
 - Continuously updates (if auto-scan is on)
 
 ### 🗺 Channel Map
@@ -1055,7 +1104,7 @@ Each network as a **triangle**:
 Customer says "Wi-Fi is weak in one corner of my house."
 
 1. Keep **Auto-scan** ON
-2. Walk around with the phone (go to far corners)
+2. Carry the Windows laptop running the app between rooms; wait for a new scan result at each location
 3. Watch **Signal History graph** — which BSSID strong, which weak?
 4. Check **Detail Panel** vendor (is it modem or mesh node?)
 5. Check **Channel Map** for 2.4 GHz overlap
@@ -1105,7 +1154,7 @@ Theme names translate to active UI language.
 2. GitHub Releases API query
 3. 3 possible outcomes:
    - **Up to date** — Latest version
-   - **New version available** — Download page opens
+   - **New version available** — Version details and download option are shown
    - **Error** — No internet or GitHub unreachable
 
 **Auto-check:** Once daily on launch (silent).
@@ -1140,10 +1189,10 @@ Theme names translate to active UI language.
 
 **Solution:**
 1. Download from https://www.speedtest.net/apps/cli
-2. Copy `speedtest.exe` to `C:\Windows` or `C:\Program Files\Speedtest`
+2. Copy `speedtest.exe` to the folder containing the LeoNet Pro executable
 3. Restart the application
 
-**Alternative:** Use Cloudflare fallback in Settings (manual, rate-limited)
+**Alternative:** Use the manual Cloudflare fallback offered when the CLI is unavailable.
 
 ### ❌ Wi-Fi scan returns empty
 
@@ -1159,7 +1208,7 @@ Theme names translate to active UI language.
 ### ❌ iPerf3 "unable to connect to server"
 
 **Cause 1:** Server is down
-- Try different server: `bouygues.iperf.fr`, `speedtest.hetzner.de`
+- Try different server: `192.168.1.50` (örnek/example; kendi sunucunuzu kullanın/use your own server)
 
 **Cause 2:** Firewall blocking
 - Windows Defender → Inbound rules → check port 5201
@@ -1195,27 +1244,38 @@ Theme names translate to active UI language.
 
 **Solution:**
 1. Control Panel → Uninstall application
-2. Delete `%APPDATA%/LeoNetPro` folder (settings reset)
+2. Back up history with DB/CSV export before deleting anything; record the error and version
 3. Reinstall latest setup
 
 ---
 
 ## FAQ
 
-### Does this app collect data?
+### What data is stored and which connections are made?
 
-**No.** All test results are stored in a local SQLite database (`%APPDATA%/LeoNetPro/history.db`). No data is sent to any server.
+Test history is stored locally. Network operations contact external services, which receive connection information such as your public IP address and the requests needed to perform the operation. Enabled email and webhook alerts send notification content to the configured destinations.
 
-Only these user-initiated connections happen:
-- Speedtest CLI servers (during speed test)
-- Cloudflare CDN (fallback speed test)
-- GitHub Releases API (update check, optional)
+Network activity includes:
+- Speedtest CLI (Ookla), LibreSpeed and iPerf3 connections during tests, including scheduled Speedtest CLI tests when enabled.
+- Cloudflare download/upload requests for manual fallback tests and bufferbloat diagnostics; DNS providers and Akamai resolver checks during diagnostics.
+- ICMP, DNS, TCP and UDP probes to diagnostic targets. The connection outage monitor starts automatically with the application.
+- GitHub Releases API requests for automatic update checks on launch (at most once daily after a successful check) and manual checks.
+- Local Wi-Fi scanning, enabled automatically by default and subject to Windows/driver behavior.
+- Email/webhook notifications when configured and enabled.
+
+Cloudflare fallback speed tests are not used by the scheduled speed-test feature. Third-party services have their own privacy policies and terms. This application does not claim that no external connections occur in the background.
 
 ### Where is my data stored?
 
-- **Database:** `%APPDATA%/LeoNetPro/history.db`
-- **Settings:** Windows Registry — `HKCU\Software\Burak Aslan\LeoNet Pro`
-- All history persists unless you delete your computer.
+- **Database:** `%TEMP%\hiz_testleri.db`, used by this version. Use DB export to back it up.
+- **Settings:** QSettings: main key `HKCU\Software\BurakAslan\LeoNetPro`; iPerf custom command settings use `HKCU\Software\LeoNetPro\iperf_custom`. Do not delete unrelated keys.
+- Windows temporary-file cleanup can remove history. Back up before upgrading or reinstalling.
+
+### Measurement limitations
+
+These are diagnostic estimates, not certification results. Displayed Wi-Fi dBm is estimated from Windows signal quality: `floor(quality_percent / 2) - 100`. Width, maximum data rate and radio capabilities may be inferred when Windows does not report them. An asterisk marks some estimated values; its absence is not proof of a direct hardware measurement. Scan data can be delayed or cached, and chart refresh does not guarantee a new radio sample.
+
+Jitter here is variation between consecutive ping round-trip times, not the RTP interarrival-jitter calculation in RFC 3550. The DNSSEC check reads the AD flag in a Cloudflare DoH response; it does not verify your ISP resolver's DNSSEC behavior. Resolver-IP observations alone do not prove a VPN DNS leak. MTU, bufferbloat and the quality score depend on probe replies and successful load generation. Missing replies or failed load can make results misleading; repeat or cross-check important measurements. A PDF report does not certify TR-143 compliance.
 
 ### Can I use this in my company?
 
@@ -1223,11 +1283,11 @@ According to EULA, **commercial use is prohibited**. Personal and educational us
 
 ### Do I lose settings on version upgrade?
 
-**No.** Installer handles upgrades automatically — history, settings, theme selection preserved.
+Retention depends on the installer and version. Export a DB/CSV backup before upgrading; history in the temporary folder is not guaranteed to persist.
 
 ### Does Wi-Fi scanning harm my computer?
 
-**No.** WlanScan API is a built-in Windows feature. Completely passive — only reads data.
+The app requests scanning through the Windows WlanScan API. It is not merely passive file reading; timing and radio behavior depend on the driver.
 
 ### Can I install on multiple computers?
 
@@ -1240,7 +1300,20 @@ Yes — no limit for personal use.
 **Author:** Burak Aslan
 **LinkedIn:** [Burak ASLAN](https://www.linkedin.com/in/burak-aslan-/)
 **GitHub:** [github.com/burakaslann/LeoNetPro](https://github.com/burakaslann/LeoNetPro)
-**Version:** 1.1.1
+**Version:** 1.2.0
 
 For bug reports or feature suggestions:
 [github.com/burakaslann/LeoNetPro/issues](https://github.com/burakaslann/LeoNetPro/issues)
+
+
+### Bu derlemenin OCR bileşenleri / OCR components in this build
+
+Tesseract motoru ayrıca kurulur; EasyOCR/Torch bu EXE paketinde bulunmaz. / Install Tesseract separately; EasyOCR/Torch are not included in this executable package.
+
+
+### PDF ve çıkış düzeltmeleri / PDF and exit fixes
+
+PDF raporlarında Türkçe karakterleri destekleyen gömülü DejaVu Sans kullanılır. Başlık satır aralıkları düzeltildi. Hız testi sırasında Ctrl+Q ile çıkış, çalışan Speedtest işlemini iptal eder. Tepsiye küçültme etkinse X düğmesi uygulamayı arka plana alabilir.
+
+PDF reports embed DejaVu Sans for Turkish characters and use corrected heading spacing. Ctrl+Q cancels the active Speedtest process when exiting. With minimize-to-tray enabled, the X button may keep the application running in the tray.
+

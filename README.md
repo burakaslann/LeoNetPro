@@ -1,267 +1,145 @@
-# LeoNet Pro v1.1.1 🦁
+# LeoNet Pro v1.2.0 🦁
 
-**Network Diagnostics & Internet Speed Test Desktop Application**
+Windows 10/11 (64-bit) için ağ tanılama ve hız testi uygulaması. / Network diagnostics and speed testing for Windows 10/11 (64-bit).
 
-LeoNet Pro is a desktop network diagnostics and speed testing application for Windows 10/11. Speed testing, live ping monitoring, Wi-Fi scanning, advanced network diagnostics, iPerf3 throughput testing, and report export — all in a single interface with 6 themes and Turkish/English language support.
+## Türkçe
 
----
+### v1.2.0 değişiklikleri
 
-## What's New in v1.1.1
+- **PySide6 / Qt 6 geçişi:** Arayüz PyQt5 yerine PySide6 kullanıyor.
+- **Thread yaşam döngüsü:** Çalışan işçilerin referansları korunuyor; çıkışta işçilerin bitmesi bekleniyor.
+- **Ping Monitor:** Start/Stop sırasında buton durumu güncelleniyor; işçi sonlanana kadar yeniden başlatma kısa süre devre dışı kalabilir.
+- **Testlerin birlikte kullanımı:** Speedtest + Ping ve iPerf3 + Ping kullanılabilir. Özel iPerf dahil ağır hız testlerinin eşzamanlı başlatılması engellenir. Bufferbloat içeren tanılama paketi de ağır test olarak değerlendirilir.
 
-- 🔧 **Band detection fix** — Channel-to-band mapping now uses the real IEEE 5 GHz channel list; channels like 63 and 85 on Wi-Fi 6E/7 radios are correctly identified as 6 GHz
-- 📏 **Channel width fix** — 2.4 GHz networks no longer show impossible widths (capped at 20/40 MHz)
-- ↔️ **Resizable columns** — drag column borders to resize the Wi-Fi table
-- 🔎 **SSID search box** — filter the Wi-Fi table instantly by SSID name
+- Tanılama ekranında ping için kaynak IPv4 / ağ kartı seçimi.
+- Uygulama sağ tık menüsünden sık kullanılan işlemlere erişim.
+- Dil değiştirildiğinde ping eşiği etiketinin **Uyarı / Alert** olarak yenilenmesi.
+- GitHub güncelleme kontrolünde açıkça yüklenen CA sertifika paketiyle HTTPS doğrulaması; hata durumunda ayrıntılı günlük.
 
-See the full [v1.1.1 release notes](https://github.com/burakaslann/LeoNetPro/releases/tag/v1.1.1).
+NIC seçimi destekleyen ping komutlarına kaynak IP ekler. Tüm uygulama trafiğini seçilen karta yönlendiren bir ayar değildir; Windows yönlendirmesi ve hedefin erişilebilirliği sonucu etkiler. Menü seçiminin çalışması, ağ paketlerinin belirli fiziksel karttan çıktığını tek başına kanıtlamaz.
 
----
+### İndirme ve başlangıç
 
-## What's New in v1.1.0
+1. [Yayımlanmış sürümlerden](https://github.com/burakaslann/LeoNetPro/releases) kullanıma sunulmuş kurulum dosyasını indirin. v1.2.0 yayımlandığında dosya adı `LeoNetPro_Setup_v1.2.0.exe` olacaktır.
+2. Kurulum dilini ve bileşenleri seçin. iPerf3 bileşeni seçiliyse kurulumun içerdiği iPerf3 paketi yüklenir. Tesseract seçeneği yalnızca hazırlanan pakette Tesseract yükleyicisi varsa görünür; OCR için ayrıca kurulmalıdır.
+3. Ookla Speedtest CLI ayrı indirilir. `speedtest.exe` dosyasını LeoNet Pro EXE'sinin bulunduğu klasöre koyun; yeniden açın. [Resmî CLI sayfası](https://www.speedtest.net/apps/cli)
+4. Manuel Cloudflare yedek testi CLI bulunmadığında kullanılabilir. Zamanlanmış hız testleri CLI gerektirir.
 
-- 📡 **Real Wi-Fi scanning via WlanScan API** — Windows API-driven scan instead of relying on `netsh` cache, signal values now update accurately when moving between rooms
-- 📶 **BSSID-based Wi-Fi table** — multi-AP and mesh networks now show every radio as a separate row instead of collapsing into one
-- 🔬 **Wi-Fi Detail Panel** — vendor lookup (289-entry MAC OUI database), Wi-Fi mode (Wi-Fi 4/5/6/6E/7), Max Data Rate, Spatial Streams, MCS Index, MU-MIMO/OFDMA capability
-- 📊 **Live signal panel** — large dBm display with color-coded rating (Excellent / Good / Fair / Weak), real-time signal-time graph
-- 🎚 **Three filter toggles** — Show Hidden Networks, Show All Networks (including BSSIDs without measurable signal), Group SSIDs
-- ⚡ **iPerf3 live chart** — bandwidth visualized as a real-time line chart during the test, advanced custom command box
-- 🖼 **OCR drag-drop expanded** — PNG, JPG, BMP, WebP, TIFF support, multi-file batch processing
-- 🌐 **Full English UI coverage** — 8 hardcoded Turkish strings (OCR errors, copy feedback, dialog titles) moved to translation dictionary; 472 i18n keys total
-- 🔄 **Manual update check** — Settings → About → "Check for Updates" button, cache bypass, dialog feedback in all states
-- 🛠 **Setup wizard localization** — Inno Setup language selection (Turkish / English) now updates component, task, and run descriptions
+### Özellikler
 
-### Wi-Fi Bug Fixes
+- Ookla CLI hız testi, manuel Cloudflare yedek testi, iPerf3 istemci/sunucu ve LibreSpeed araçları.
+- Ping izleme, bağlantı kesintisi geçmişi, paket kaybı, RTT değişkenliği, MTU ve yük altında gecikme tanılaması.
+- DNS gecikmesi, Cloudflare üzerinden DNSSEC yanıt kontrolü, DoH/DoT erişim kontrolleri, çözücü IP gözlemi, traceroute ve port araçları.
+- Wi-Fi BSSID tablosu, SSID arama, yeniden boyutlandırılabilir sütunlar, sinyal geçmişi ve kanal haritası.
+- Bayt/süre hesabı, OCR, geçmiş, CSV/DB dışa aktarma ve PDF raporlama.
+- Türkçe/İngilizce arayüz, altı tema, sistem tepsisi, isteğe bağlı e-posta/webhook bildirimleri.
 
-- ✅ **Width parsing fix** — connected network's channel width no longer leaks into other BSSIDs of the same SSID (e.g., 2.4 GHz BSSID was showing 80 MHz)
-- ✅ **Detail panel auto-refresh** — selection now persists after a scan, no need to re-click; live dBm and table value stay in sync
-- ✅ **Channel Map parsing** — handles `"12 (4 %)"` style channel values, label clipping fixed
-- ✅ **Band detection** — channel-number-first logic (1–14 → 2.4 GHz, 15–177 → 5 GHz, >177 → 6 GHz) instead of relying on `netsh` band string
-- ✅ **MAC OUI duplicates** — `44:94:FC` and `78:8A:20` corrected to match the IEEE registry
-- ✅ **Auto-update fix** — moved from `QTimer.singleShot` (silently failed from background thread) to a thread-safe `pyqtSignal`
-- ✅ **Splash sync** — splash now closes via `progress_completed` signal instead of a fixed timer
+### Ölçüm sınırları
 
-See the full [v1.1.0 release notes](https://github.com/burakaslann/LeoNetPro/releases/tag/v1.1.0).
+Wi-Fi dBm değeri Windows sinyal yüzdesinden `floor(yüzde / 2) - 100` ile tahmin edilir. Tarama sonuçları gecikmeli veya önbellekten gelebilir. Kanal genişliği ve radyo yetenekleri tahmin olabilir; kanal numarası tek başına bandı kesin belirlemez. Kanal haritası spektrum analizörü değildir.
 
----
+Tanılama jitter değeri ardışık ping RTT farklarının ortalamasıdır; RFC 3550 RTP jitter hesabı değildir. DNSSEC kontrolü Cloudflare DoH yanıtındaki AD bayrağını okur; ISP çözücüsünün doğrulamasını test etmez. Çözücü IP'si tek başına VPN sızıntısı kanıtı değildir. MTU, bufferbloat ve kalite skoru kullanılan hedeflere ve başarılı ölçüme bağlı göstergelerdir. PDF raporu TR-143 sertifikasyonu sağlamaz.
 
-## Screenshots
+### Gizlilik ve veri
 
-![Ana Ekran](screenshots/LeoNetPro1.png)
+Test geçmişi yerel bilgisayarda tutulur. Test ve tanılama hizmetleri genel IP adresiniz gibi bağlantı bilgilerini ve işlem için gereken istekleri alır. E-posta/webhook bildirimleri etkinleştirildiğinde bildirim içeriği yapılandırılan hedeflere gönderilir.
+
+- Kesinti izleyicisi uygulama açıldığında otomatik başlar ve bağlantıyı düzenli olarak kontrol eder.
+- Güncelleme kontrolü açılışta otomatik olarak ve düğmeyle elle yapılabilir; başarılı otomatik kontrol günlük olarak önbelleklenir.
+- Wi-Fi otomatik taraması varsayılan olarak açıktır; Windows ve sürücü davranışına bağlıdır.
+- Zamanlanmış hız testleri etkinleştirildiğinde Ookla sunucularına bağlantı kurulur. Cloudflare yedek hız testi bu zamanlama yolunda kullanılmaz.
+- Manuel hız testi ve tanılamada Ookla, Cloudflare, seçilen DNS/iPerf3/LibreSpeed sunucuları ve diğer tanılama hedefleriyle bağlantı kurulabilir.
+
+Üçüncü tarafların kendi koşulları ve gizlilik politikaları geçerlidir. Arka planda hiçbir ağ bağlantısı kurulmadığı taahhüt edilmez.
+
+Veritabanı: `%TEMP%\hiz_testleri.db`. Ana ayarlar: `HKCU\Software\BurakAslan\LeoNetPro` (QSettings). Geçici klasör temizliği geçmişi silebilir; yükseltmeden önce DB/CSV yedeği alın. Bildirim adresleri ve kimlik bilgileri uygulama ayarlarında bulunabilir; bunları paylaşmayın.
+
+[Türkçe/İngilizce kullanım kılavuzu](USER_GUIDE.md) · [EULA](EULA.txt) · [Lisans bildirimleri](LICENSE.txt)
+
+## English
+
+### Changes in v1.2.0
+
+- **PySide6 / Qt 6 migration:** The interface now uses PySide6 instead of PyQt5.
+- **Thread lifecycle:** Running workers retain their references; application exit waits for them to finish.
+- **Ping Monitor:** Start/Stop updates the button state; restarting may be briefly disabled while the worker finishes.
+- **Concurrent tests:** Speedtest + Ping and iPerf3 + Ping can run together. Concurrent heavy speed tests, including custom iPerf, are blocked. The diagnostics suite includes bufferbloat and is also treated as a heavy test.
+
+- Source IPv4 / network adapter selection for supported ping commands.
+- Application context menu for common actions.
+- The ping threshold label refreshes to **Alert / Uyarı** when changing language.
+- GitHub update checks use an explicitly loaded CA bundle with HTTPS verification and detailed error logging.
+
+Adapter selection sets the source IP for supported ping commands; it does not bind all application traffic to an adapter. Windows routing and target reachability still apply. Selecting an adapter in the UI alone does not verify the physical egress path.
+
+### Download and setup
+
+Use the [published releases](https://github.com/burakaslann/LeoNetPro/releases). Once v1.2.0 is published, its installer will be named `LeoNetPro_Setup_v1.2.0.exe`.
+
+Choose the installer language and components. iPerf3 is installed when selected. The Tesseract option appears only when the package includes its installer; OCR requires Tesseract to be installed separately. Obtain [Ookla Speedtest CLI](https://www.speedtest.net/apps/cli) separately and place `speedtest.exe` beside the LeoNet Pro executable. Restart the app. Scheduled tests require the CLI; manual Cloudflare fallback is available when it is absent.
+
+### Features and measurement limits
+
+Speed tests, iPerf3 client/server, LibreSpeed tools, live ping, outage history, network diagnostics, Wi-Fi scanning and filtering, OCR, byte/time calculations, CSV/DB export and PDF reports are available. The UI offers Turkish/English, six themes, tray support and optional email/webhook alerts.
+
+Wi-Fi dBm is estimated from Windows signal quality using `floor(percent / 2) - 100`. Scan data can be cached or delayed. Width and capabilities may be inferred; channel number alone does not conclusively identify a band. The channel map is not a spectrum analyzer.
+
+Diagnostic jitter is the mean absolute difference between successive ping RTTs, not RFC 3550 RTP jitter. The DNSSEC check reads the Cloudflare DoH AD flag, not ISP resolver validation. Resolver IP observations alone do not prove a VPN leak. MTU, bufferbloat and quality scores are indicative and depend on successful measurements. PDF reports do not certify TR-143 compliance.
+
+### Privacy and storage
+
+Test history is stored locally. Test and diagnostic services receive connection information such as your public IP address and requests needed for each operation. When email/webhook alerts are enabled, notification content is sent to the configured destinations.
+
+- The outage monitor starts with the application and checks connectivity periodically.
+- Update checks can run automatically on launch or manually; a successful automatic check is cached for the day.
+- Automatic Wi-Fi scanning is enabled by default and depends on Windows and driver behavior.
+- Enabled scheduled speed tests contact Ookla servers. The Cloudflare fallback is not used by that scheduling path.
+- Manual tests and diagnostics can contact Ookla, Cloudflare, selected DNS/iPerf3/LibreSpeed servers and other diagnostic targets.
+
+Third parties have their own terms and privacy policies. The app does not promise that no background network activity occurs.
+
+Database: `%TEMP%\hiz_testleri.db`. Main settings: `HKCU\Software\BurakAslan\LeoNetPro` (QSettings). Temporary-file cleanup may remove history; export DB/CSV backups before upgrading. Settings can contain notification destinations and credentials; do not share them.
+
+[User guide](USER_GUIDE.md) · [EULA](EULA.txt) · [License notices](LICENSE.txt)
+
+## License / Lisans
+
+LeoNet Pro kapalı kaynaklıdır. Arayüz PySide6 / Qt 6 kullanır; LGPL kapsamındaki bileşenlerin hakları uygulama lisansından bağımsızdır. Ayrıntılar ve resmî kaynaklar: [LICENSE.txt](LICENSE.txt).
+
+LeoNet Pro is proprietary. Its interface uses PySide6 / Qt 6; rights in LGPL-covered components are independent of the application license. Details and official references: [LICENSE.txt](LICENSE.txt).
+
+Kişisel ve eğitim amaçlı kullanım ücretsizdir; ticari kullanım önceden yazılı izne tabidir. Üçüncü tarafların hakları kendi lisanslarına tabidir.
+
+Personal and educational use is free; commercial use requires prior written permission. Third-party components remain subject to their own licenses.
+
+Developed by **Burak Aslan** · [GitHub](https://github.com/burakaslann/LeoNetPro) · [LinkedIn](https://www.linkedin.com/in/burak-aslan-/)
+
+
+### PDF ve çıkış düzeltmeleri / PDF and exit fixes
+
+PDF raporlarında Türkçe karakterleri destekleyen gömülü DejaVu Sans kullanılır. Başlık satır aralıkları düzeltildi. Hız testi sırasında Ctrl+Q ile çıkış, çalışan Speedtest işlemini iptal eder. Tepsiye küçültme etkinse X düğmesi uygulamayı arka plana alabilir.
+
+PDF reports embed DejaVu Sans for Turkish characters and use corrected heading spacing. Ctrl+Q cancels the active Speedtest process when exiting. With minimize-to-tray enabled, the X button may keep the application running in the tray.
+
+
+## Ekran Görüntüleri / Screenshots
+
+Görseller Türkçe arayüzü göstermektedir. / Screenshots show the Turkish interface.
+
+### Ana Ekran / Main
+![Ana ekran / Main](screenshots/LeoNetPro1.png)
+
+### iPerf3 / LibreSpeed
 ![iPerf3 / LibreSpeed](screenshots/LeoNetPro2.png)
-![Geçmiş](screenshots/LeoNetPro3.png)
-![Tanılama](screenshots/LeoNetPro4.png)
-![WiFi](screenshots/LeoNetPro5.png)
-![Ayarlar](screenshots/LeoNetPro6.png)
 
----
+### Geçmiş / History
+![Geçmiş / History](screenshots/LeoNetPro3.png)
 
-## Download
-
-👉 **[Download the latest release (LeoNetPro_Setup_v1.1.1.exe)](https://github.com/burakaslann/LeoNetPro/releases/latest)**
-
-No Python or pip required. Just download and run the setup wizard.
-
----
-
-## Features
-
-### Speed Testing
-- ⚡ **Internet Speed Test** — Speedtest CLI (Ookla) integration; download, upload and ping results
-- 🌐 **iPerf3 Real Throughput Testing** — parallel streams, bandwidth cap, continuous traffic mode, live server log with `--logfile` polling
-- 🔀 iPerf3 Integration — bundled Windows build (v3.21) with required DLL dependencies
-- 📊 **iPerf3 Live Chart** — real-time line chart of bandwidth during the test, second-by-second line streaming via `Popen + -i 1`
-- 🖥️ **iPerf3 Server Mode** — built-in server with live log output, automatic port cleanup on restart
-- 🚀 **LibreSpeed Test** — browser-based speed test, no external binary required
-- ☁️ **Cloudflare Fallback Speed Test** — when Speedtest CLI is not installed, manual-only download/upload/ping measurement via Cloudflare's public endpoints (rate-limited, not used in scheduled tests)
-
-### Network Diagnostics
-- 📡 **Live Ping Monitor** — real-time graph, alert threshold, beep + tray notification on spike
-- ⚠️ **Outage History** — automatic connection outage logging (start time, end time, duration)
-- 🔬 **Packet Loss & Jitter** — 20-ping measurement, RFC 3550 compliant jitter calculation (inter-packet delay variation)
-- 📏 **MTU Discovery** — binary search algorithm for precise Path MTU detection (576–1500), automatic interpretation (Ethernet/Wi-Fi, PPPoE, VPN, VLAN)
-- 🫧 **Bufferbloat Test** — bidirectional (simultaneous download + upload load) latency measurement under load, A–F grading
-- 🌍 **DNS Analysis** — latency comparison (Local, Cloudflare, Google, OpenDNS, Quad9), DNSSEC validation, DNS over HTTPS (DoH) availability, DNS over TLS (DoT) availability, DNS leak detection
-- 🔌 **Gateway Ping** — automatic default gateway detection and latency measurement
-- 🔢 **TTL Analysis** — remote OS fingerprinting, hop count estimation
-- 🏆 **Network Quality Score** — 0–100 health score calculated from all diagnostic results
-
-### Tools
-- 🔍 **Ping Test** — 4-ping with average RTT extraction
-- 🔗 **TCP Port Check** — connection test with open/closed/filtered status
-- 📡 **UDP Port Check** — UDP probe with ICMP unreachable detection
-- 🌐 **DNS Lookup** — forward + reverse resolution
-- 🗺️ **Traceroute** — live hop-by-hop display with per-hop timeout
+### Tanılama / Diagnostics
+![Tanılama / Diagnostics](screenshots/LeoNetPro4.png)
 
 ### Wi-Fi
-- 📶 **Real-time Wi-Fi Scanner** — WlanScan API call triggers a fresh scan (not cached), 3.5 s scan delay; auto-scan defaults to ON with 15 s interval
-- 📊 **BSSID-based table** — every radio of a multi-AP/mesh network shown as a separate row, vendor inferred from MAC OUI (289-entry database)
-- 🔬 **Detail Panel** — Entity (SSID, BSSID, Vendor), Stats (signal + rating), Configuration (channel/width, security, basic rates), Capabilities (Wi-Fi mode, max rate, MIMO, OFDMA), Signal History (live graph + large color-coded dBm display)
-- 🗺 **Channel Map** — separate plots for 2.4 / 5 / 6 GHz, signal strength as a triangle (base = channel width)
-- 🎚 **Filter toggles** — Show Hidden Networks (default off), Show All Networks (default off, includes BSSIDs without measurable signal), Group SSIDs (default on)
+![Wi-Fi](screenshots/LeoNetPro5.png)
 
-### Reporting & History
-- 🔬 **TR-143 OCR Analysis** — automatic speed value extraction from screenshots via Tesseract OCR
-- 📈 **Test History & Charts** — SQLite database, time-series graphs with theme-aware colors, QTableWidget with sortable columns
-- 📁 **CSV Export** — full test history in Excel-compatible format
-- 💾 **DB Export** — direct SQLite database export
-- 📄 **PDF Report** — TR-143 compliant professional PDF report
-- 📊 **Summary Report** — statistical overview (avg/max/min, pass/warn/fail rates)
-
-### Alerts & Notifications
-- 🔔 **Email Alerts** — automatic SMTP notification on speed test failure
-- 🪝 **Webhook Alerts** — Slack / Teams / Discord / custom webhook support
-- 🖥️ **System Tray** — run in background, tray notifications, right-click context menu
-
-### Customization
-- 🎨 **6 Themes** — Light, Dark Navy, Forest Green, Sunset Orange, Cherry Blossom, Midnight Black (theme names localized per UI language)
-- 🇹🇷 🇬🇧 **Turkish / English** — instant language switch, no restart required; 472 i18n keys cover the full UI including OCR, iPerf3, dialogs, and setup wizard
-- ⏱️ **Auto Test** — scheduled speed test every N minutes (requires Speedtest CLI)
-- 🔊 **Sound Effects** — click and alert sounds with mute toggle
-- 📐 **Mini Widget** — floating mini speed display
-
----
-
-## Getting Started
-
-### 1. Download Setup
-
-Go to [Releases](https://github.com/burakaslann/LeoNetPro/releases) and download `LeoNetPro_Setup_v1.1.1.exe`.
-
-Run the setup wizard — iPerf3 is included as an optional component (enabled by default) and will be installed with all required DLL files.
-
-### 2. Install Speedtest CLI ⚠️
-
-> **Required for internet speed testing and scheduled tests**
->
-> LeoNet Pro uses **Ookla's Speedtest CLI**.
-> This binary is **not bundled** with the application.
->
-> Download: https://www.speedtest.net/apps/cli
->
-> If Speedtest CLI is not found, a **Cloudflare-based fallback test** will be available for manual use only. Scheduled/automatic tests require Speedtest CLI.
-
-### 3. Run
-
-Double-click `LeoNet Pro` from the desktop shortcut or Start Menu.
-
----
-
-## Keyboard Shortcuts
-
-| Key | Action |
-|-----|--------|
-| `Ctrl+Enter` | Calculate TR-143 |
-| `Ctrl+T` | Start / Stop Speed Test |
-| `F5` | Reload Logs |
-| `Ctrl+K` | Copy Result to Clipboard |
-| `Ctrl+O` | OCR Screenshot Analysis |
-| `Ctrl+P` | Generate PDF Report |
-| `Ctrl+W` | Clear Form |
-| `Ctrl+M` | Toggle Mini Widget |
-| `Ctrl+D` | Go to Diagnostics Tab |
-| `Ctrl+H` | Go to History Tab |
-| `Ctrl+,` | Go to Settings Tab |
-| `F11` | Cycle Themes (6 themes) |
-| `Ctrl+Q` | Quit Application |
-
----
-
-## Tabs
-
-| # | Tab | Content |
-|---|-----|---------|
-| 0 | 🏠 Home | TR-143 calculator, OCR, speed test, live gauges, stopwatch |
-| 1 | ⚡ iPerf3 / LibreSpeed | iPerf3 client & server (with live chart), LibreSpeed, Ping/TCP Port/UDP Port/DNS/Traceroute |
-| 2 | 📊 History | SQLite history table, trend charts, CSV/DB export, summary report |
-| 3 | 🔬 Diagnostics | Live ping monitor, full network diagnostics, outage log, quality score |
-| 4 | 📶 Wi-Fi | Real-time scanner, BSSID-based table, detail panel, 2.4/5/6 GHz channel map |
-| 5 | ⚙️ Settings | Language, theme, email/webhook alerts, sound toggle, manual update check |
-
----
-
-## Network Diagnostics Details
-
-| Test | Method | Details |
-|------|--------|---------|
-| Packet Loss | 20× ICMP ping | Percentage of lost packets |
-| Jitter | RFC 3550 | Mean inter-packet delay variation |
-| Avg. Ping | 20× ICMP | Average round-trip time |
-| MTU Discovery | Binary search with DF bit | Precise Path MTU (576–1500 bytes) |
-| Bufferbloat | Bidirectional load + ping | Simultaneous DL+UL traffic, A–F grade |
-| DNS Latency | Raw UDP queries × 3 | Median latency for 5 DNS providers |
-| DNSSEC | Cloudflare DoH AD flag | Authenticated Data validation check |
-| DoH | HTTPS probe | DNS over HTTPS availability |
-| DoT | TLS handshake on port 853 | DNS over TLS availability |
-| DNS Leak | whoami.akamai.net | Resolver IP disclosure test |
-| Gateway | Auto-detect + 5× ping | Default gateway latency |
-| TTL/Hops | ICMP TTL analysis | Remote OS guess, hop count estimate |
-| Interfaces | ipconfig /all | Full network adapter listing |
-
----
-
-## Privacy & Network Usage
-
-LeoNet Pro does **not** collect, transmit, or store any personal data on external servers. All test results are stored locally in a SQLite database on your computer.
-
-Network connections are made **only** when you initiate a test:
-- Speedtest CLI servers (Ookla) — when running a speed test
-- Cloudflare CDN (`speed.cloudflare.com`) — fallback speed test only, manual trigger only, rate-limited (min. 30s between tests)
-- Cloudflare CDN (`speed.cloudflare.com`) — temporary download/upload during bufferbloat diagnostic (single-use, user-initiated)
-- Cloudflare DNS (`cloudflare-dns.com`) — DNSSEC/DoH/DoT check during diagnostics
-- iPerf3 servers — user-specified addresses only
-- ICMP/DNS/TCP/UDP — diagnostic probes to user-specified targets
-- GitHub Releases API — optional update check
-
-**No background network activity occurs without explicit user action.**
-
----
-
-## System Requirements
-
-- Windows 10 / 11 (64-bit)
-- 700 MB disk space (after installation)
-- 4 GB RAM (recommended)
-- Internet connection (for speed testing)
-
----
-
-## Third-Party Notices
-
-**Speedtest CLI** — Ookla LLC. Binary not bundled with this software.
-LeoNet Pro is not affiliated with, endorsed by, or sponsored by Ookla LLC.
-Speedtest® is a registered trademark of Ookla LLC.
-https://www.speedtest.net/apps/cli
-
-**iPerf3** — BSD License. Copyright © The Board of Trustees of the University of Illinois.
-https://iperf.fr
-
-**LibreSpeed** — LGPL License. https://librespeed.org
-
-**Tesseract OCR** — Apache License 2.0. Copyright © Google Inc.
-https://github.com/tesseract-ocr/tesseract
-
-**Cloudflare** — `speed.cloudflare.com` and `cloudflare-dns.com` endpoints are used solely as diagnostic and fallback speed measurement tools. This usage is manual-only, rate-limited, minimal in volume, and non-commercial. LeoNet Pro is not affiliated with, endorsed by, or sponsored by Cloudflare, Inc. Cloudflare® is a registered trademark of Cloudflare, Inc.
-
----
-
-## Disclaimer
-
-THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. THE DEVELOPER ASSUMES NO LIABILITY FOR ANY DAMAGES ARISING FROM ITS USE. USERS ARE SOLELY RESPONSIBLE FOR COMPLIANCE WITH ALL APPLICABLE LAWS, REGULATIONS, AND THIRD-PARTY TERMS OF SERVICE. SEE [EULA.txt](EULA.txt) FOR FULL TERMS.
-
----
-
-## License
-
-Personal and educational use is free and unrestricted.
-Commercial use is prohibited without prior written permission.
-
-See [EULA.txt](EULA.txt) for full terms.
-
----
-
-## Author
-
-Developed by **Burak Aslan**
-
-📧 GitHub: [github.com/burakaslann/LeoNetPro](https://github.com/burakaslann/LeoNetPro)
-🔗 LinkedIn: [Burak ASLAN](https://www.linkedin.com/in/burak-aslan-/)
+### Ayarlar / Settings
+![Ayarlar / Settings](screenshots/LeoNetPro6.png)
